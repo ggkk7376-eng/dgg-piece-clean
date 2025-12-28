@@ -112,6 +112,7 @@ async function CarouselImage({
       src={size.url}
       width={size.width}
       height={size.height}
+      className="h-16 w-auto object-contain"
     />
   );
 }
