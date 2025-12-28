@@ -20,7 +20,7 @@ services:
     command: >
       sh -c " if [ ! -s /app/sqlite_data/dgg-piece.db ]; then
         echo 'Database missing or empty. Seeding from image...';
-        cp -f /app/dgg-piece.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Source DB not found in image';
+        cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Source DB not found in image';
       else
         echo 'Database exists and is not empty. Skipping seed.';
       fi; node server.js "

@@ -46,8 +46,8 @@ RUN chown nextjs:nodejs .next
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
-# Explicitly copy the database file because 'standalone' doesn't include it
-COPY --from=builder --chown=nextjs:nodejs /app/dgg-piece.db ./dgg-piece.db
+# Directly copy from build context (safer than from builder)
+COPY dgg-piece.db /app/dgg-piece-seed.db
 
 USER nextjs
 

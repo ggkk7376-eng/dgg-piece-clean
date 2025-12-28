@@ -1,0 +1,12 @@
+# Ignore everything by default to be safe, then unignore specific needed files
+# OR standard ignore list
+node_modules
+.next
+.git
+.vscode
+.env*
+build
+dist
+
+# Whitelist the database explicitly just in case (though default whitelist is all)
+!dgg-piece.db
