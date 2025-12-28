@@ -21,7 +21,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 type GalleryItemData = {
     images: (Media | number)[];
     title: string;
-    price: string;
+    price?: string | null;
     description?: string;
     category?: "kilns" | "controllers" | "accessories" | "other";
     id?: string;
