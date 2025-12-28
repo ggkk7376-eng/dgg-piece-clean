@@ -28,9 +28,9 @@ type GalleryItemData = {
 };
 
 type Props = {
-    title?: string;
-    items?: GalleryItemData[];
-};
+    title?: string | null;
+    items?: GalleryItemData[] | null;
+} & Record<string, any>;
 
 // --- Carousel Component (Vertical Layout Optimized) ---
 const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
