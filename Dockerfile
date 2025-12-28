@@ -21,6 +21,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build the application
 # Note: verify if "npm run build" works. If using Payload, usually "next build" is fine.
+ENV PAYLOAD_SECRET=build_time_dummy_secret
 RUN npm run build
 
 # Production image, copy all the files and run next
