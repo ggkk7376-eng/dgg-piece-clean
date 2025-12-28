@@ -17,3 +17,11 @@ services:
     volumes:
       - ./media:/app/media
       - ./dgg-piece.db:/app/dgg-piece.db
+
+  tunnel:
+    container_name: dgg-piece-tunnel
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=eyJhIjoiMDVmY2E1OWRiYmExOGRmNWJiY2UxNmU0MTI2ZDMzYjAiLCJ0IjoiNzYyYTUzZDItNjFiZi00ODBjLThkODktYzlkM2ZlOTA0OWY1IiwicyI6IlptUmhaalprWldNdE1tUmlaaTAwTnpjM0xXRTVNMkl0WTJGaFkyVXpORFUzWlRjeCJ9
