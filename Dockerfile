@@ -6,7 +6,6 @@ WORKDIR /app
 
 COPY package.json package-lock.json* bun.lock* ./
 # Install dependencies appropriately
-RUN \
 RUN npm ci
 
 # Rebuild the source code only when needed
@@ -22,7 +21,6 @@ ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build the application
 # Note: verify if "npm run build" works. If using Payload, usually "next build" is fine.
-RUN \
 RUN npm run build
 
 # Production image, copy all the files and run next
