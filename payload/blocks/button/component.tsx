@@ -9,7 +9,7 @@ import { payload } from "@/lib/payload";
 import type { Button as ButtonProps, Dialog } from "@/payload-types";
 
 import Link from "next/link";
-import { Page } from "@/payload-types";
+import type { Page } from "@/payload-types";
 
 export function Button(props: ButtonProps) {
   const { type, label, dialog, page, url } = props;
