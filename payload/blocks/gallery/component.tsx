@@ -22,8 +22,8 @@ type GalleryItemData = {
     images: (Media | number)[];
     title: string;
     price?: string | null;
-    description?: string;
-    category?: "kilns" | "controllers" | "accessories" | "other";
+    description?: string | null;
+    category?: "kilns" | "controllers" | "accessories" | "other" | null;
     id?: string;
 };
 
