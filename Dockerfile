@@ -1,7 +1,4 @@
-
-# Force rebuild to pick up new files (like the database)
-ENV CACHE_BUST=2025-12-28-v1
-
+FROM node:20-slim AS base
 
 # Install dependencies only when needed
 FROM base AS deps
@@ -15,6 +12,8 @@ RUN npm ci
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
+# Force rebuild to pick up new files (like the database)
+ARG CACHE_BUST=2025-12-28-v2
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
