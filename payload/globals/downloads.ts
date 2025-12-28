@@ -1,13 +1,15 @@
 import type { GlobalConfig } from "payload";
 
-const fileFields = [
+import type { Field } from "payload";
+
+const fileFields: Field[] = [
     {
         name: "name",
         label: {
             en: "File Name",
             pl: "Nazwa Pliku",
         },
-        type: "text" as const,
+        type: "text",
         required: true,
     },
     {
@@ -16,7 +18,7 @@ const fileFields = [
             en: "File",
             pl: "Plik"
         },
-        type: "upload" as const,
+        type: "upload",
         relationTo: "media",
         required: true,
     }
