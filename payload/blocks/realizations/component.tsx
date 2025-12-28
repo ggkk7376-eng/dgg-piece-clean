@@ -19,15 +19,15 @@ import { Text } from "@/components/text";
 import External from "@/assets/icons/external.svg";
 
 type Slide = {
-    image: string | Media;
-    description?: string;
-    id?: string;
+    image: string | Media | number | null;
+    description?: string | null;
+    id?: string | null;
 };
 
 type Props = {
-    triggerLabel: string;
-    slides: Slide[];
-};
+    triggerLabel?: string | null;
+    slides?: Slide[] | null;
+} & Record<string, any>;
 
 export function Realizations({ triggerLabel, slides }: Props) {
     const [open, setOpen] = useState(false);

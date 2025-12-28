@@ -24,7 +24,7 @@ type GalleryItemData = {
     price?: string | null;
     description?: string | null;
     category?: "kilns" | "controllers" | "accessories" | "other" | null;
-    id?: string;
+    id?: string | null;
 };
 
 type Props = {
