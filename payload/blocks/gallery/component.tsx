@@ -40,7 +40,7 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
     const images = Array.isArray(item.images)
         ? item.images.filter(
             (img): img is Media & { url: string } =>
-                !!(img && typeof img !== "string" && img.url)
+                !!(img && typeof img === "object" && "url" in img && img.url)
         )
         : [];
 
@@ -145,7 +145,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {filteredItems.map((item, index) => {
                     const firstImage = Array.isArray(item.images) && item.images.length > 0 ? item.images[0] : null;
-                    const validFirstImage = firstImage && typeof firstImage !== "string" && firstImage.url;
+                    const validFirstImage = firstImage && typeof firstImage === "object" && "url" in firstImage && firstImage.url;
 
                     return (
                         <Dialog key={item.id || index}>
