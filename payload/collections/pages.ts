@@ -2,6 +2,7 @@ import type { CollectionConfig } from "payload";
 
 import { unrestricted } from "@/payload/access/unrestricted";
 import { section } from "@/payload/blocks/section/config";
+import { realizations } from "@/payload/blocks/realizations/config";
 
 export const pages: CollectionConfig = {
   slug: "pages",
@@ -80,7 +81,7 @@ export const pages: CollectionConfig = {
         en: "Content",
         pl: "Treść",
       },
-      blocks: [section],
+      blocks: [section, realizations],
     },
   ],
 };
