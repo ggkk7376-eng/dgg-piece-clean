@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  app:
+    container_name: dgg-piece
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      # Secrets should be moved to .env on the server for security
+      PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
+      NEXT_PUBLIC_SERVER_URL: "${NEXT_PUBLIC_SERVER_URL}"
+      # SQLite database is used, so we don't need POSTGRES_URL
+    volumes:
+      - ./media:/app/media
+      - ./dgg-piece.db:/app/dgg-piece.db
