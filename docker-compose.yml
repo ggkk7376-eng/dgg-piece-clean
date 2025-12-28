@@ -8,7 +8,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "3000:3000"
+      - "3005:3000"
     environment:
       # Secrets should be moved to .env on the server for security
       PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
