@@ -1,4 +1,7 @@
-FROM node:20-slim AS base
+
+# Force rebuild to pick up new files (like the database)
+ENV CACHE_BUST=2025-12-28-v1
+
 
 # Install dependencies only when needed
 FROM base AS deps
