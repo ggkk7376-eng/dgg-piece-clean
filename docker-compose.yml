@@ -19,6 +19,15 @@ services:
     volumes:
       - ./media:/app/media
       - ./sqlite_data:/app/sqlite_data
+    # Startup script: Copy DB from image (if exists) to persistent volume (if missing), then start app
+    command: >
+      sh -c "
+      if [ ! -f /app/sqlite_data/dgg-piece.db ]; then
+        echo 'Initializing database from image...';
+        cp /app/dgg-piece.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Source DB not found in image';
+      fi;
+      node server.js
+      "
 
   tunnel:
     container_name: dgg-piece-tunnel
