@@ -43,5 +43,40 @@ export const headline: Block = {
         },
       ],
     },
+    {
+      type: "select",
+      name: "color",
+      label: {
+        en: "Color Scheme",
+        pl: "Kolorystyka",
+      },
+      defaultValue: "default",
+      options: [
+        {
+          label: {
+            en: "Default (Alternating)",
+            pl: "Domyślna (Naprzemienna)",
+          },
+          value: "default",
+        },
+        {
+          label: {
+            en: "White",
+            pl: "Biały",
+          },
+          value: "white",
+        },
+        {
+          label: {
+            en: "Accent (Orange)",
+            pl: "Akcent (Pomarańczowy)",
+          },
+          value: "accent",
+        },
+      ],
+      admin: {
+        position: "sidebar",
+      },
+    },
   ],
 };

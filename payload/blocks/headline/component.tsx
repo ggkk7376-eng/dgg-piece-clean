@@ -3,7 +3,10 @@ import { Text } from "@/components/text";
 import { cn } from "@/lib/utils";
 import type { Headline as HeadlineProps } from "@/payload-types";
 
-export function Headline({ lines }: HeadlineProps) {
+export function Headline(props: HeadlineProps) {
+  const { lines } = props;
+  const color = (props as any).color || "default";
+
   return (
     <Text variant="headline" className="not-last:mb-0 text-center">
       {lines.map((line, index) => (
@@ -11,7 +14,9 @@ export function Headline({ lines }: HeadlineProps) {
           key={line.id}
           className={cn(
             "block",
-            index % 2 === 0 ? "text-accent" : "text-white",
+            color === "white" && "text-white",
+            color === "accent" && "text-accent",
+            color === "default" && (index % 2 === 0 ? "text-accent" : "text-white"),
           )}
         >
           <EnterAnimationBlurText>{line.text}</EnterAnimationBlurText>
