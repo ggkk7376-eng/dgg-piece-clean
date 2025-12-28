@@ -16,14 +16,14 @@ services:
       NEXT_PUBLIC_SERVER_URL: "${NEXT_PUBLIC_SERVER_URL}"
       # SQLite database is used, so we don't need POSTGRES_URL
       DATABASE_URI: file:/app/sqlite_data/dgg-piece.db
+    # Startup script: Copy DB from image if persistent file is missing OR EMPTY (0 bytes)
     command: >
-      sh -c "
-        mkdir -p /app/sqlite_data &&
-        chmod 777 /app/sqlite_data &&
-        mkdir -p /app/media &&
-        chmod 777 /app/media &&
-        node server.js
-      "
+      sh -c " mkdir -p /app/sqlite_data; chmod 777 /app/sqlite_data; if [ ! -s /app/sqlite_data/dgg-piece.db ]; then
+        echo 'Database missing or empty. Seeding from image...';
+        cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Seeding failed';
+      else
+        echo 'Database exists. Skipping seed.';
+      fi; chmod 666 /app/sqlite_data/dgg-piece.db; node server.js "
     volumes:
       - ./sqlite_data:/app/sqlite_data
       - ./media:/app/media

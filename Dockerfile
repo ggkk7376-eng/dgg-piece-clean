@@ -47,7 +47,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 # Directly copy from build context (safer than from builder)
-# COPY dgg-piece.db /app/dgg-piece-seed.db
+COPY dgg-piece.db /app/dgg-piece-seed.db
 
 USER nextjs
 
