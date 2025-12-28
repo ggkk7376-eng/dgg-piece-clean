@@ -114,7 +114,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                     {/* Viewport */}
                     <div className="overflow-visible w-full h-full flex items-center" ref={emblaRef}>
                         <div className="flex h-full items-center touch-pan-y w-full">
-                            {slides.map((slide, index) => {
+                            {slides?.map((slide, index) => {
                                 const imageUrl = typeof slide.image === "object" && slide.image?.url ? slide.image.url : "";
                                 const isActive = index === currentIndex;
 
