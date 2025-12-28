@@ -23,7 +23,7 @@ services:
         cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Source DB not found in image';
       else
         echo 'Database exists and is not empty. Skipping seed.';
-      fi; node server.js "
+      fi; # Fix permissions just in case (allow everyone to read/write) chmod 777 /app/sqlite_data; chmod 666 /app/sqlite_data/dgg-piece.db; node server.js "
 
   tunnel:
     container_name: dgg-piece-tunnel
