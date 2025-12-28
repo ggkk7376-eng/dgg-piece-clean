@@ -18,12 +18,12 @@ services:
       DATABASE_URI: file:/app/sqlite_data/dgg-piece.db
     # Startup script: Copy DB from image if persistent file is missing OR EMPTY (0 bytes)
     command: >
-      sh -c " if [ ! -s /app/sqlite_data/dgg-piece.db ]; then
+      sh -c " mkdir -p /app/sqlite_data; chmod 777 /app/sqlite_data; if [ ! -s /app/sqlite_data/dgg-piece.db ]; then
         echo 'Database missing or empty. Seeding from image...';
-        cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Source DB not found in image';
+        cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Seeding failed';
       else
-        echo 'Database exists and is not empty. Skipping seed.';
-      fi; # Fix permissions just in case (allow everyone to read/write) chmod 777 /app/sqlite_data; chmod 666 /app/sqlite_data/dgg-piece.db; node server.js "
+        echo 'Database exists. Skipping seed.';
+      fi; chmod 666 /app/sqlite_data/dgg-piece.db; node server.js "
 
   tunnel:
     container_name: dgg-piece-tunnel
