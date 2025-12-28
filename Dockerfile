@@ -7,10 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json* bun.lock* ./
 # Install dependencies appropriately
 RUN \
-    if [ -f bun.lock ]; then npm install -g bun && bun install --frozen-lockfile; \
-    elif [ -f package-lock.json ]; then npm ci; \
-    else echo "Lockfile not found." && exit 1; \
-    fi
+RUN npm ci
 
 # Rebuild the source code only when needed
 FROM base AS builder
@@ -26,9 +23,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # Build the application
 # Note: verify if "npm run build" works. If using Payload, usually "next build" is fine.
 RUN \
-    if [ -f bun.lock ]; then npm install -g bun && bun run build; \
-    else npm run build; \
-    fi
+RUN npm run build
 
 # Production image, copy all the files and run next
 FROM base AS runner
