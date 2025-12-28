@@ -4,7 +4,7 @@ import { ModalAction, ModalClose } from "@/components/modal";
 import { Button } from "@/components/ui/button";
 import { useAppForm } from "@/lib/form";
 
-export function ContactForm({ initialMessage }: { initialMessage?: string }) {
+export function ContactForm({ initialMessage }: { initialMessage?: string } & Record<string, any>) {
   const form = useAppForm({
     defaultValues: {
       name: "",
