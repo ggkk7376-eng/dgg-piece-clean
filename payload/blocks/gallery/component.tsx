@@ -19,7 +19,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 
 // --- Types ---
 type GalleryItemData = {
-    images: Media[];
+    images: (Media | number)[];
     title: string;
     price: string;
     description?: string;
