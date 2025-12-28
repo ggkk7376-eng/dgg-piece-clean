@@ -9,4 +9,4 @@ build
 dist
 
 # Whitelist the database explicitly just in case (though default whitelist is all)
-!dgg-piece.db
+# !dgg-piece.db
