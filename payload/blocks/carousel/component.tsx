@@ -90,7 +90,17 @@ async function CarouselImage({
   const media =
     typeof mediaOrId === "number" ? await getMedia(mediaOrId) : mediaOrId;
 
-  const size = getDefinedSize(media, "carouselImage");
+  // Fallback chain: thumbnail -> original URL
+  let size = getDefinedSize(media, "thumbnail");
+
+  if (!size) {
+    // Fallback to original if thumbnail is missing
+    size = {
+      url: media.url!,
+      width: media.width!,
+      height: media.height!,
+    };
+  }
 
   if (!size) {
     return null;
