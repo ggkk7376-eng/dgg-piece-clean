@@ -3,6 +3,7 @@ version: "3"
 services:
   app:
     container_name: dgg-piece
+    user: root
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,9 +15,10 @@ services:
       PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
       NEXT_PUBLIC_SERVER_URL: "${NEXT_PUBLIC_SERVER_URL}"
       # SQLite database is used, so we don't need POSTGRES_URL
+      DATABASE_URI: file:/app/sqlite_data/dgg-piece.db
     volumes:
       - ./media:/app/media
-      - ./dgg-piece.db:/app/dgg-piece.db
+      - ./sqlite_data:/app/sqlite_data
 
   tunnel:
     container_name: dgg-piece-tunnel

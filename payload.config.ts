@@ -37,8 +37,10 @@ const config = buildConfig({
   secret: env.PAYLOAD_SECRET,
   db: sqliteAdapter({
     client: {
-      url: "file:./dgg-piece.db",
+      url: process.env.DATABASE_URI || "file:./dgg-piece.db",
     },
+    // Enable schema push to create tables on empty DB (since we have no migrations)
+    push: true,
   }),
   i18n: {
     fallbackLanguage: "pl",
