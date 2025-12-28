@@ -90,17 +90,13 @@ async function CarouselImage({
   const media =
     typeof mediaOrId === "number" ? await getMedia(mediaOrId) : mediaOrId;
 
-  // Fallback chain: thumbnail -> original URL
-  let size = getDefinedSize(media, "thumbnail");
-
-  if (!size) {
-    // Fallback to original if thumbnail is missing
-    size = {
-      url: media.url!,
-      width: media.width!,
-      height: media.height!,
-    };
-  }
+  // Use original always for best quality and correct aspect ratio
+  // Thumbnail (400x300) forces 4:3 which distorts/crops wide logos
+  const size = {
+    url: media.url!,
+    width: media.width!,
+    height: media.height!,
+  };
 
   if (!size) {
     return null;
