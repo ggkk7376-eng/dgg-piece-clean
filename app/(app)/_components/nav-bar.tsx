@@ -28,11 +28,11 @@ export async function NavBar() {
   }
 
   const items = [
-    { label: nav?.whyUsLabel || "Dlaczego my?", url: "/#why-us" },
-    { label: nav?.missionLabel || "Nasza misja", url: "/#mission" },
-    { label: nav?.worksLabel || "Realizacje", url: "/#works" },
-    { label: "Produkty", url: "/#products" }, // Hardcoded per screenshot request
-    { label: nav?.contactLabel || "Kontakt", url: "/#contact" },
+    { label: nav?.whyUsLabel || "Why Us", url: "/#why-us" },
+    { label: nav?.missionLabel || "Mission", url: "/#mission" },
+    { label: nav?.worksLabel || "Works", url: "/#works" },
+    { label: nav?.servicesLabel || "Services", url: "/#services" },
+    { label: nav?.contactLabel || "Contact", url: "/#contact" },
   ];
 
   return (
