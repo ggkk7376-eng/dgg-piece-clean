@@ -11,6 +11,7 @@ export function Section({
   children,
   className,
 }: SectionProps & Readonly<{ className?: string }>) {
+  console.log('[Section Debug] Rendering section with slug:', slug);
   return (
     <NebulaBackground>
       <EnterAnimation>

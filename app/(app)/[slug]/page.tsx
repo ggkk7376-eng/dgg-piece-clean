@@ -42,6 +42,7 @@ export async function generateMetadata({
 
 export default async function Page({ params }: PageProps) {
   const page = await getPage((await params).slug);
+  console.log('[Page Debug] Page content blocks:', page.content?.map(b => ({ type: b.blockType, slug: (b as any).slug || 'N/A' })));
 
   return (
     <>
