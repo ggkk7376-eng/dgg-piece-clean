@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
         }
 
         const { name, email, message, subject } = result.data;
+        console.log("[API send-email] Processing request from:", email, "Subject:", subject);
 
         const settings = await payload.findGlobal({
             slug: "settings",

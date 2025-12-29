@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 };
 
 import { Footer } from "@/components/footer";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -45,6 +46,7 @@ export default function RootLayout({
       >
         <LazyMotion features={domMax} strict>
           {children}
+          <Toaster />
           <Footer />
         </LazyMotion>
       </body>
