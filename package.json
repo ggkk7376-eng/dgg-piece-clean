@@ -53,6 +53,7 @@
     "@tailwindcss/postcss": "^4.1.17",
     "@types/chroma-js": "^3.1.2",
     "@types/node": "^20.19.25",
+    "@types/nodemailer": "^7.0.4",
     "@types/react": "^19.2.6",
     "@types/react-dom": "^19.2.3",
     "tailwindcss": "^4.1.17",
