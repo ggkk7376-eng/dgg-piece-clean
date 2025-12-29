@@ -16,6 +16,7 @@ const getPage = cache(async (slug: string) => {
   const result = await payload.find({
     collection: "pages",
     where: { slug: { equals: slug } },
+    depth: 2,
   });
 
   if (result.docs.length === 0) {
