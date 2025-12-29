@@ -11,12 +11,11 @@ export function Section({
   children,
   className,
 }: SectionProps & Readonly<{ className?: string }>) {
-  console.log('[Section Debug] Rendering section with slug:', slug);
   return (
     <NebulaBackground>
       <EnterAnimation>
         <section
-          id={slug ?? undefined}
+          id={slug?.toLowerCase() ?? undefined}
           className={cn(
             "flex min-h-[70vh] flex-col gap-10 px-5 pt-36 pb-11",
             className,
