@@ -236,7 +236,10 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                                                         </DialogDescription>
                                                     </DialogHeader>
                                                     <div className="pt-4">
-                                                        <ContactForm initialMessage={`Dzień dobry, jestem zainteresowany produktem: ${item.title}. Proszę o więcej informacji.`} />
+                                                        <ContactForm
+                                                            subject={item.title}
+                                                            initialMessage={`Dzień dobry, jestem zainteresowany produktem: ${item.title}. Proszę o więcej informacji.`}
+                                                        />
                                                     </div>
                                                 </DialogContent>
                                             </Dialog>

@@ -6,7 +6,7 @@ import { useAppForm } from "@/lib/form";
 import { toast } from "sonner";
 import { useState } from "react";
 
-export function ContactForm({ initialMessage }: { initialMessage?: string } & Record<string, any>) {
+export function ContactForm({ initialMessage, subject }: { initialMessage?: string, subject?: string } & Record<string, any>) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useAppForm({
     defaultValues: {
@@ -22,8 +22,9 @@ export function ContactForm({ initialMessage }: { initialMessage?: string } & Re
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(value),
+          body: JSON.stringify({ ...value, subject }),
         });
+
 
         if (!response.ok) {
           const error = await response.json();

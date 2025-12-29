@@ -7,6 +7,7 @@ const sendEmailSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address"),
     message: z.string().min(1, "Message is required"),
+    subject: z.string().optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -21,7 +22,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        const { name, email, message } = result.data;
+        const { name, email, message, subject } = result.data;
 
         const settings = await payload.findGlobal({
             slug: "settings",
@@ -51,15 +52,20 @@ export async function POST(req: NextRequest) {
             },
         });
 
+        const emailSubject = subject
+            ? `Zapytanie o produkt: ${subject} (od ${name})`
+            : `Nowa wiadomość z formularza kontaktowego: ${name}`;
+
         await transporter.sendMail({
             from: `"${name}" <${sender}>`, // Send AS the configured sender (to avoid spoofing blocks), but set name
             replyTo: email, // Reply to the user's email
             to: sender, // Send TO the confirmed sender (the site owner)
-            subject: `Nowa wiadomość z formularza kontaktowego: ${name}`,
-            text: `Wiadomość od: ${name} (${email})\n\nTreść:\n${message}`,
+            subject: emailSubject,
+            text: `Wiadomość od: ${name} (${email})\n\nTemat: ${subject || 'Formularz kontaktowy'}\n\nTreść:\n${message}`,
             html: `
-        <h2>Nowa wiadomość z formularza kontaktowego</h2>
+        <h2>${emailSubject}</h2>
         <p><strong>Od:</strong> ${name} (${email})</p>
+        <p><strong>Temat:</strong> ${subject || 'Formularz kontaktowy'}</p>
         <p><strong>Treść:</strong></p>
         <blockquote style="white-space: pre-wrap; background: #f9f9f9; padding: 10px; border-left: 4px solid #ccc;">${message}</blockquote>
       `,
