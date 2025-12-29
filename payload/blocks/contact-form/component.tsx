@@ -35,6 +35,8 @@ export function ContactForm({ initialMessage, subject }: { initialMessage?: stri
           description: "Dziękujemy za kontakt. Odpiszemy najszybciej jak to możliwe.",
         });
 
+        form.reset();
+
         // Optional: Close modal if this is inside one, but we don't have direct control here easily without context
         // Rely on user to close or add auto-close logic if needed. 
         // For now, success toast is enough feedback.
