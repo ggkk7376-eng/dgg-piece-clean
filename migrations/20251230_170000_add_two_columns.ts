@@ -24,3 +24,9 @@ export async function up({ payload, req }: MigrateUpArgs): Promise<void> {
 export async function down({ payload, req }: MigrateDownArgs): Promise<void> {
   await payload.db.drizzle.run(sql`DROP TABLE "pages_blocks_two_columns";`)
 }
+
+export const m20251230_170000_add_two_columns = {
+  up,
+  down,
+  name: '20251230_170000_add_two_columns',
+}
