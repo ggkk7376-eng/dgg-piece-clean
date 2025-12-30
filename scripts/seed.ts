@@ -13,7 +13,6 @@ try {
       data: {
         email: 'admin@dgg.pl',
         password: 'password123',
-        role: 'admin',
       },
     });
     console.log('--- Admin user created: admin@dgg.pl / password123 ---');
