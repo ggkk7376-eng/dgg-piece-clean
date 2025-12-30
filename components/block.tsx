@@ -9,22 +9,7 @@ import { StatusAlert } from "@/payload/blocks/status-alert/component";
 import { Text } from "@/payload/blocks/text/component";
 import { Gallery } from "@/payload/blocks/gallery/component";
 import { Realizations } from "@/payload/blocks/realizations/component";
-import { TwoColumns } from "@/payload/blocks/two-columns/component";
-import type { Config } from "@/payload-types";
-
-type BlocksProps = Config["blocks"][keyof Config["blocks"]];
-
-const blockComponents: any = {
-  button: Button,
-  carousel: Carousel,
-  headline: Headline,
-  section: Section,
-  "status-alert": StatusAlert,
-  text: Text,
-  "contact-form": ContactForm,
-  gallery: Gallery,
-  realizations: Realizations,
-  "two-columns": TwoColumns,
+realizations: Realizations,
 };
 
 export function Block(props: BlocksProps) {
