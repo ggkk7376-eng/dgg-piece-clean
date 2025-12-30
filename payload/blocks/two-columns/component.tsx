@@ -1,5 +1,11 @@
-import type { TwoColumn } from "@/payload-types";
 import { Text } from "@/components/text";
+
+type TwoColumn = {
+    leftColumn?: string | null;
+    rightColumn?: string | null;
+    id?: string | null;
+    blockType?: "two-columns";
+};
 
 type Props = TwoColumn & {
     className?: string;
