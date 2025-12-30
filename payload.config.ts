@@ -17,6 +17,7 @@ import { statusAlert } from "./payload/blocks/status-alert/config";
 import { text } from "./payload/blocks/text/config";
 import { gallery } from "./payload/blocks/gallery/config";
 import { realizations } from "./payload/blocks/realizations/config";
+import { twoColumns } from "./payload/blocks/two-columns/config";
 import { dialogs } from "./payload/collections/dialogs";
 import { media } from "./payload/collections/media";
 import { pages } from "./payload/collections/pages";
@@ -33,7 +34,7 @@ const config = buildConfig({
   },
   globals: [settings, downloads, navigation],
   collections: [pages, media, users, dialogs],
-  blocks: [button, carousel, contactForm, gallery, headline, statusAlert, text, section, realizations],
+  blocks: [button, carousel, contactForm, gallery, headline, statusAlert, text, section, realizations, twoColumns],
   secret: env.PAYLOAD_SECRET,
   db: sqliteAdapter({
     client: {
