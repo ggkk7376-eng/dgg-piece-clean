@@ -10,7 +10,8 @@
     "check": "biome check --write",
     "typecheck": "tsc",
     "db:seed": "npx payload run scripts/seed.ts --disable-transpile",
-    "db:migrate": "payload migrate"
+    "db:migrate": "payload migrate",
+    "db:force-table": "npx payload run scripts/force-table.ts --disable-transpile"
   },
   "dependencies": {
     "@payloadcms/db-sqlite": "^3.69.0",
