@@ -5,6 +5,24 @@ import { getPayload } from "payload";
 
 const payload = await getPayload({ config });
 
+try {
+  const users = await payload.find({ collection: 'users' });
+  if (users.totalDocs === 0) {
+    await payload.create({
+      collection: 'users',
+      data: {
+        email: 'admin@dgg.pl',
+        password: 'password123',
+        role: 'admin',
+      },
+    });
+    console.log('--- Admin user created: admin@dgg.pl / password123 ---');
+  }
+} catch (e) {
+  console.error('Failed to create admin user:', e);
+}
+
+
 const media = await (async () => {
   const mediaDir = path.resolve(
     import.meta.dirname,
