@@ -54,7 +54,7 @@ export const section: Block = {
           pl: "Zawartość",
         },
       },
-      blocks: [button, carousel, headline, statusAlert, text, contactForm, gallery, realizations, twoColumns],
+      blocks: [button, carousel, headline, statusAlert, text, contactForm, gallery, realizations],
     },
   ],
 };
