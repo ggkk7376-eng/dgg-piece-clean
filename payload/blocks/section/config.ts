@@ -38,6 +38,31 @@ export const section: Block = {
       },
     },
     {
+      type: "select",
+      name: "spacing",
+      label: {
+        en: "Block Spacing",
+        pl: "Odstępy między blokami",
+      },
+      defaultValue: "default",
+      options: [
+        {
+          label: {
+            en: "Default",
+            pl: "Standardowe",
+          },
+          value: "default",
+        },
+        {
+          label: {
+            en: "None (Compact)",
+            pl: "Brak (Kompaktowe)",
+          },
+          value: "none",
+        },
+      ],
+    },
+    {
       type: "blocks",
       name: "children",
       label: {

@@ -17,7 +17,8 @@ export function Section({
         <section
           id={slug?.toLowerCase() ?? undefined}
           className={cn(
-            "flex min-h-[70vh] flex-col gap-10 px-5 pt-36 pb-11",
+            "flex min-h-[70vh] flex-col px-5 pt-36 pb-11",
+            ((props as any).spacing === "none" ? "gap-2" : "gap-10"),
             className,
           )}
         >
