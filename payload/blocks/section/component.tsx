@@ -10,6 +10,7 @@ export function Section({
   slug,
   children,
   className,
+  ...props
 }: SectionProps & Readonly<{ className?: string }>) {
   return (
     <NebulaBackground>
