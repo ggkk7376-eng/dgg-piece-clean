@@ -34,7 +34,7 @@ const config = buildConfig({
   },
   globals: [settings, downloads, navigation],
   collections: [pages, media, users, dialogs],
-  blocks: [button, carousel, contactForm, gallery, headline, statusAlert, text, section, realizations],
+  blocks: [button, carousel, contactForm, gallery, headline, statusAlert, text, section, realizations, twoColumns],
   secret: env.PAYLOAD_SECRET,
   db: sqliteAdapter({
     client: {
