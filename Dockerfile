@@ -25,10 +25,6 @@ ENV NEXT_TELEMETRY_DISABLED 1
 # Note: verify if "npm run build" works. If using Payload, usually "next build" is fine.
 ENV PAYLOAD_SECRET=build_time_dummy_secret
 RUN npm run build
-# Generate seed database during build to ensure admin user exists.
-# We set DATABASE_URI to create a local file in the build context.
-ENV DATABASE_URI=file:./dgg-piece.db
-RUN npm run db:seed
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -51,8 +47,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 # Directly copy from build context (safer than from builder)
-# Copy the generated seed database from the builder stage
-COPY --from=builder --chown=nextjs:nodejs /app/dgg-piece.db /app/dgg-piece-seed.db
+COPY dgg-piece.db /app/dgg-piece-seed.db
 
 USER nextjs
 
