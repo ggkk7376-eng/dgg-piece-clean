@@ -32,6 +32,7 @@ services:
     container_name: dgg-piece-tunnel
     image: cloudflare/cloudflared:latest
     restart: unless-stopped
+    network_mode: host
     command: tunnel run
     environment:
       - TUNNEL_EDGE_PORT=443
