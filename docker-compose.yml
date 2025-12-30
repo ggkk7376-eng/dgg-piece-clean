@@ -20,7 +20,7 @@ services:
     command: >
       sh -c " mkdir -p /app/sqlite_data; chmod 777 /app/sqlite_data; if [ ! -s /app/sqlite_data/dgg-piece.db ]; then
         echo 'Database missing or empty. Seeding from image...';
-        cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Seeding failed';
+        cp -f /app/dgg-piece.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Seeding failed';
       else
         echo 'Database exists. Skipping seed.';
       fi; chmod 666 /app/sqlite_data/dgg-piece.db; node server.js "
