@@ -8,6 +8,7 @@ import { headline } from "../headline/config";
 import { statusAlert } from "../status-alert/config";
 import { text } from "../text/config";
 import { realizations } from "../realizations/config";
+import { twoColumns } from "../two-columns/config";
 
 export const section: Block = {
   slug: "section",
@@ -53,7 +54,7 @@ export const section: Block = {
           pl: "Zawartość",
         },
       },
-      blocks: [button, carousel, headline, statusAlert, text, contactForm, gallery, realizations],
+      blocks: [button, carousel, headline, statusAlert, text, contactForm, gallery, realizations, twoColumns],
     },
   ],
 };
