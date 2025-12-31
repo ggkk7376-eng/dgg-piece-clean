@@ -49,7 +49,7 @@ export default async function Page({ params }: PageProps) {
 
       <NavBar />
 
-      {page.content?.map((block) => (
+      {page.content?.map((block: any) => (
         <Block {...block} key={block.id} />
       ))}
     </>

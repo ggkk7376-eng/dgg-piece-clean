@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { ContactForm } from "../contact-form/component";
 import { RichText } from "@payloadcms/richtext-lexical/react";
+import { usePathname } from "next/navigation";
 
 // --- Types ---
 type GalleryItemData = {
@@ -23,7 +24,7 @@ type GalleryItemData = {
     title: string;
     price?: string | null;
     description?: string | null;
-    category?: "kilns" | "controllers" | "accessories" | "other" | null;
+    category?: "kilns" | "controllers" | "accessories" | "other" | "furniture" | null;
     id?: string | null;
 };
 
@@ -106,19 +107,28 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
 };
 
 export const Gallery: React.FC<Props> = ({ title, items }) => {
-    const [activeCategory, setActiveCategory] = useState<string>("all");
+    // Default to 'kilns' instead of 'all'
+    const [activeCategory, setActiveCategory] = useState<string>("kilns");
+    const [openItemId, setOpenItemId] = useState<string | null>(null);
+    const pathname = usePathname();
+
+    // Close any open item when pathname changes (navigation)
+    useEffect(() => {
+        setOpenItemId(null);
+    }, [pathname]);
 
     if (!items || items.length === 0) return null;
 
     const categories = [
-        { id: "all", label: "Wszystkie" },
+        // Removed 'all'
         { id: "kilns", label: "Piece" },
         { id: "controllers", label: "Sterowniki" },
         { id: "accessories", label: "Akcesoria" },
+        { id: "furniture", label: "Umeblowanie" },
         { id: "other", label: "Inne" },
     ];
 
-    const filteredItems = activeCategory === "all" ? items : items.filter((item) => item.category === activeCategory);
+    const filteredItems = items.filter((item) => item.category === activeCategory);
 
     return (
         <div className="container mx-auto py-12 px-4">
@@ -142,16 +152,28 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {/* Adjusted grid:
+                - sm:grid-cols-2 (was 1, better for mobile/tablet)
+                - lg:grid-cols-4 (more density)
+                - xl:grid-cols-5 (user requested ~5 per row on desktop)
+            */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
                 {filteredItems.map((item, index) => {
                     const firstImage = Array.isArray(item.images) && item.images.length > 0 ? item.images[0] : null;
                     const validFirstImage = firstImage && typeof firstImage === "object" && "url" in firstImage && firstImage.url;
+                    // Stable ID for state
+                    const itemId = item.id || `item-${index}`;
 
                     return (
-                        <Dialog key={item.id || index}>
+                        <Dialog
+                            key={itemId}
+                            open={openItemId === itemId}
+                            onOpenChange={(open) => setOpenItemId(open ? itemId : null)}
+                        >
                             <DialogTrigger asChild>
                                 <div className="group cursor-pointer flex flex-col border rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all bg-card h-full">
-                                    <div className="relative h-64 w-full bg-zinc-50 dark:bg-black/40 overflow-hidden flex items-center justify-center">
+                                    {/* Reduced height from h-64 to h-48 */}
+                                    <div className="relative h-48 w-full bg-zinc-50 dark:bg-black/40 overflow-hidden flex items-center justify-center">
                                         {validFirstImage ? (
                                             <Image
                                                 src={firstImage.url!}
@@ -162,20 +184,19 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                                         ) : (
                                             <div className="text-zinc-400 text-sm">Brak zdjęcia</div>
                                         )}
-                                        <div className="absolute inset-0 bg-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                                            {/* Hover effect placeholder */}
-                                        </div>
                                         <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <span className="bg-primary text-primary-foreground px-2 py-1 rounded text-xs">Pokaż</span>
+                                            <span className="bg-primary text-primary-foreground px-2 py-1 rounded text-xs shado-sm">Pokaż</span>
                                         </div>
                                     </div>
-                                    <div className="p-5 flex flex-col flex-grow">
-                                        <div className="flex justify-between items-start">
+                                    <div className="p-3 flex flex-col flex-grow">
+                                        <div className="flex flex-col justify-between h-full">
                                             <div>
-                                                <h3 className="text-lg font-semibold line-clamp-2">{item.title}</h3>
-                                                <p className="text-sm text-zinc-500 mt-1 capitalize">{categories.find(c => c.id === item.category)?.label || item.category}</p>
+                                                <h3 className="text-sm font-semibold line-clamp-2 leading-tight mb-1">{item.title}</h3>
+                                                <p className="text-xs text-zinc-500 capitalize">{categories.find(c => c.id === item.category)?.label || item.category}</p>
                                             </div>
-                                            <span className="text-md font-bold text-primary whitespace-nowrap ml-4">{item.price}</span>
+                                            <div className="mt-2 text-right">
+                                                <span className="text-sm font-bold text-primary whitespace-nowrap">{item.price}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -253,7 +274,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
             </div>
             {filteredItems.length === 0 && (
                 <div className="text-center py-24 border border-dashed rounded-xl">
-                    <p className="text-muted-foreground text-lg">Brak produktów dla wybranej kategorii.</p>
+                    <p className="text-muted-foreground text-lg">Brak produktów w tej kategorii.</p>
                 </div>
             )}
         </div>

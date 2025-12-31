@@ -1,19 +1,37 @@
-/* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
-/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
-import config from '@payload-config'
-import '@payloadcms/next/css'
-import {
-  REST_DELETE,
-  REST_GET,
-  REST_OPTIONS,
-  REST_PATCH,
-  REST_POST,
-  REST_PUT,
-} from '@payloadcms/next/routes'
+export const dynamic = 'force-dynamic'
 
-export const GET = REST_GET(config)
-export const POST = REST_POST(config)
-export const DELETE = REST_DELETE(config)
-export const PATCH = REST_PATCH(config)
-export const PUT = REST_PUT(config)
-export const OPTIONS = REST_OPTIONS(config)
+export const GET = async (req: any, ctx: any) => {
+  const { REST_GET } = await import('@payloadcms/next/routes')
+  const config = (await import('@payload-config')).default
+  return await REST_GET(config)(req, ctx)
+}
+
+export const POST = async (req: any, ctx: any) => {
+  const { REST_POST } = await import('@payloadcms/next/routes')
+  const config = (await import('@payload-config')).default
+  return await REST_POST(config)(req, ctx)
+}
+
+export const DELETE = async (req: any, ctx: any) => {
+  const { REST_DELETE } = await import('@payloadcms/next/routes')
+  const config = (await import('@payload-config')).default
+  return await REST_DELETE(config)(req, ctx)
+}
+
+export const PATCH = async (req: any, ctx: any) => {
+  const { REST_PATCH } = await import('@payloadcms/next/routes')
+  const config = (await import('@payload-config')).default
+  return await REST_PATCH(config)(req, ctx)
+}
+
+export const PUT = async (req: any, ctx: any) => {
+  const { REST_PUT } = await import('@payloadcms/next/routes')
+  const config = (await import('@payload-config')).default
+  return await REST_PUT(config)(req, ctx)
+}
+
+export const OPTIONS = async (req: any, ctx: any) => {
+  const { REST_OPTIONS } = await import('@payloadcms/next/routes')
+  const config = (await import('@payload-config')).default
+  return await REST_OPTIONS(config)(req, ctx)
+}

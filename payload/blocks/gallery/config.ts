@@ -55,7 +55,8 @@ export const gallery: Block = {
           options: [
             { label: { en: "Kilns", pl: "Piece" }, value: "kilns" },
             { label: { en: "Controllers", pl: "Sterowniki" }, value: "controllers" },
-            { label: { en: "Accessories", pl: "Akcesoria/Spirale" }, value: "accessories" },
+            { label: { en: "Accessories", pl: "Akcesoria" }, value: "accessories" },
+            { label: { en: "Furniture", pl: "Umeblowanie" }, value: "furniture" },
             { label: { en: "Other", pl: "Inne" }, value: "other" },
           ],
           defaultValue: "kilns",

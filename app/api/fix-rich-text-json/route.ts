@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { payload } from "@/lib/payload";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
     try {
+        const { payload } = await import("@/lib/payload");
         const pages = await payload.find({
             collection: "pages",
             limit: 1000,

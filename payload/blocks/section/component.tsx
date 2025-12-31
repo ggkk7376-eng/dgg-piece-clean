@@ -23,7 +23,7 @@ export function Section({
         >
           <div className="relative flex flex-col items-center gap-6">
             <TextProvider className="text-light-300">
-              {children?.map((child) => (
+              {children?.map((child: any) => (
                 <Block {...child} key={child.id} />
               ))}
             </TextProvider>

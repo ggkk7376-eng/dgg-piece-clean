@@ -41,7 +41,7 @@ const config = buildConfig({
       url: process.env.DATABASE_URI || "file:./dgg-piece.db",
     },
     // Enable schema push to create tables on empty DB (since we have no migrations)
-    push: true,
+    push: env.PAYLOAD_SECRET !== 'build_dummy_secret_123',
   }),
   i18n: {
     fallbackLanguage: "pl",

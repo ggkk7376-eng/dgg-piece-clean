@@ -1,8 +1,15 @@
 import { NextResponse } from "next/server";
-import { payload } from "@/lib/payload";
+
+export const dynamic = "force-dynamic";
 
 export async function GET() {
     try {
+        const { payload } = await import("@/lib/payload");
+        // Check if we can access payload
+        if (!payload) {
+            return NextResponse.json({ error: "Payload not initialized" });
+        }
+
         const pages = await payload.find({
             collection: "pages",
             limit: 1,

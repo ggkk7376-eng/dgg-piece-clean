@@ -1,5 +1,6 @@
-import { payload } from "@/lib/payload";
 import { type NextRequest, NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 import nodemailer from "nodemailer";
 import { z } from "zod";
 
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
         }
 
         const { name, email, message, subject } = result.data;
+        const { payload } = await import("@/lib/payload");
         console.log("[API send-email] Processing request from:", email, "Subject:", subject);
 
         const settings = await payload.findGlobal({
