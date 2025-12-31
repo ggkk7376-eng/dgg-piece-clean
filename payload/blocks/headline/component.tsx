@@ -8,7 +8,7 @@ export function Headline(props: HeadlineProps) {
   const color = (props as any).color || "default";
 
   return (
-    <Text variant="headline" className="not-last:mb-0 [&_*]:!mb-0 text-center leading-tight">
+    <Text variant="headline" className="flex flex-col items-center gap-2 text-center leading-tight [&_*]:!m-0">
       {lines.map((line, index) => (
         <span
           key={line.id}
