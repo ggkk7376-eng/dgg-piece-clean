@@ -113,8 +113,26 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
     const pathname = usePathname();
 
     // Close any open item when pathname changes (navigation)
+    // Close any open item when pathname changes or user navigates via hash/clicks
     useEffect(() => {
         setOpenItemId(null);
+
+        const handleHashChange = () => setOpenItemId(null);
+        window.addEventListener("hashchange", handleHashChange);
+
+        const handleClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            const link = target.closest("a");
+            if (link) {
+                setOpenItemId(null);
+            }
+        };
+        document.addEventListener("click", handleClick);
+
+        return () => {
+            window.removeEventListener("hashchange", handleHashChange);
+            document.removeEventListener("click", handleClick);
+        };
     }, [pathname]);
 
     if (!items || items.length === 0) return null;
