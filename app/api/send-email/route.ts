@@ -53,7 +53,21 @@ export async function POST(req: NextRequest) {
             tls: {
                 rejectUnauthorized: false,
             },
+            debug: true, // Enable debug logging
+            logger: true, // Log to console
         });
+
+        // Verify connection configuration
+        try {
+            await transporter.verify();
+            console.log("[API send-email] SMTP connection verified");
+        } catch (verifyError) {
+            console.error("[API send-email] SMTP Verification Failed:", verifyError);
+            return NextResponse.json(
+                { error: "Failed to connect to email server (SMTP)", details: verifyError instanceof Error ? verifyError.message : String(verifyError) },
+                { status: 500 }
+            );
+        }
 
         const emailSubject = subject
             ? `Zapytanie o produkt: ${subject} (od ${name})`
