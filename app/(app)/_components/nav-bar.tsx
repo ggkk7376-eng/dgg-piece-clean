@@ -22,6 +22,7 @@ export async function NavBar() {
     });
     downloads = await payload.findGlobal({
       slug: "downloads",
+      depth: 2,
     });
   } catch (e) {
     console.error("Failed to fetch navigation or downloads:", e);
