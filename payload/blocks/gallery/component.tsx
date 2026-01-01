@@ -24,7 +24,7 @@ type GalleryItemData = {
     title: string;
     price?: string | null;
     description?: string | null;
-    category?: "kilns" | "controllers" | "accessories" | "other" | "furniture" | null;
+    category?: "kilns" | "controllers" | "accessories" | "other" | "furniture" | "spirals" | null;
     id?: string | null;
 };
 
@@ -144,6 +144,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
         { id: "controllers", label: "Sterowniki" },
         { id: "accessories", label: "Akcesoria" },
         { id: "furniture", label: "Umeblowanie" },
+        { id: "spirals", label: "Spirale" },
         { id: "other", label: "Inne" },
     ];
 
