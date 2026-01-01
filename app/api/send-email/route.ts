@@ -14,9 +14,12 @@ const sendEmailSchema = z.object({
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
+        console.log("[API send-email] RAW REQUEST BODY:", JSON.stringify(body)); // Log raw body
+
         const result = sendEmailSchema.safeParse(body);
 
         if (!result.success) {
+            console.error("[API send-email] VALIDATION ERROR:", result.error.flatten().fieldErrors); // Log validation error
             return NextResponse.json(
                 { error: "Invalid form data", details: result.error.flatten().fieldErrors },
                 { status: 400 }
