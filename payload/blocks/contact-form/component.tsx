@@ -57,7 +57,10 @@ export function ContactForm({ initialMessage, subject }: { initialMessage?: stri
       onSubmit={async (e) => {
         e.preventDefault();
         e.stopPropagation();
+        console.log("Form submitted via DOM event");
+        toast.info("Debug: Próba wysyłki..."); // Temporary debug toast
         await form.handleSubmit();
+        console.log("HandleSubmit finished");
       }}
     >
       <form.AppField name="name" validators={{
