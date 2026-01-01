@@ -1,6 +1,6 @@
 "use client";
 
-import { ModalAction, ModalClose } from "@/components/modal";
+import { ModalClose } from "@/components/modal";
 import { Button } from "@/components/ui/button";
 import { useAppForm } from "@/lib/form";
 import { toast } from "sonner";
@@ -83,12 +83,6 @@ export function ContactForm({ initialMessage, subject }: { initialMessage?: stri
           <Button variant="outline" type="button" disabled={isSubmitting}>Anuluj</Button>
         </ModalClose>
 
-        <ModalAction>
-          {/* ModalAction might be wrapping the button and doing something specific for Dialogs, 
-               but we need to trigger form submit. 
-               If ModalAction prevents default, we might have issues. 
-               Let's assume standard button behavior first. */}
-        </ModalAction>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Wysyłanie..." : "Wyślij"}
         </Button>
@@ -96,4 +90,3 @@ export function ContactForm({ initialMessage, subject }: { initialMessage?: stri
     </form.Form>
   );
 }
-
