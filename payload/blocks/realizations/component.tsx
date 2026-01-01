@@ -122,7 +122,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                                     <div
                                         key={slide.id || index}
                                         className={cn(
-                                            "flex-[0_0_85%] md:flex-[0_0_65%] min-w-0 px-4 transition-all duration-500 ease-in-out transform h-[60vh] md:h-[80vh] flex items-center justify-center",
+                                            "flex-[0_0_85%] md:flex-[0_0_90%] min-w-0 px-4 transition-all duration-500 ease-in-out transform h-[75vh] md:h-[90vh] flex flex-col items-center justify-center",
                                             isActive ? "opacity-100 z-10 scale-100" : "opacity-30 grayscale scale-90"
                                         )}
                                     >
