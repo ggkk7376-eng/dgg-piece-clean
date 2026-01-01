@@ -117,21 +117,24 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
         const handleClickOutside = (event: MouseEvent) => {
             const galleryElement = document.getElementById(`gallery-${title?.toLowerCase().replace(/\s+/g, '-')}`);
             if (activeCategory && galleryElement && !galleryElement.contains(event.target as Node)) {
-                // Check if the click was on a button that toggles the category (to avoid conflict)
-                // Actually, simpler: if click is outside the main gallery container, close it.
                 setActiveCategory(null);
             }
         };
 
-        // Reset on navigation
-        setActiveCategory(null);
-        setOpenItemId(null);
+        if (activeCategory) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
 
-        document.addEventListener("mousedown", handleClickOutside);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [pathname, activeCategory, title]);
+    }, [activeCategory, title]);
+
+    // Reset on navigation
+    useEffect(() => {
+        setOpenItemId(null);
+        setActiveCategory(null);
+    }, [pathname]);
 
     if (!items || items.length === 0) return null;
 
