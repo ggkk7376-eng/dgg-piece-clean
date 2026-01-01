@@ -107,8 +107,8 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
 };
 
 export const Gallery: React.FC<Props> = ({ title, items }) => {
-    // Default to 'kilns' instead of 'all'
-    const [activeCategory, setActiveCategory] = useState<string>("kilns");
+    // Default to null (closed)
+    const [activeCategory, setActiveCategory] = useState<string | null>(null);
     const [openItemId, setOpenItemId] = useState<string | null>(null);
     const pathname = usePathname();
 
@@ -290,7 +290,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                     );
                 })}
             </div>
-            {filteredItems.length === 0 && (
+            {activeCategory && filteredItems.length === 0 && (
                 <div className="text-center py-24 border border-dashed rounded-xl">
                     <p className="text-muted-foreground text-lg">Brak produktów w tej kategorii.</p>
                 </div>
