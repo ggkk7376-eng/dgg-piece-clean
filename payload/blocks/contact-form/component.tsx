@@ -88,10 +88,10 @@ export function ContactForm({ initialMessage, subject }: { initialMessage?: stri
                but we need to trigger form submit. 
                If ModalAction prevents default, we might have issues. 
                Let's assume standard button behavior first. */}
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Wysyłanie..." : "Wyślij"}
-          </Button>
         </ModalAction>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Wysyłanie..." : "Wyślij"}
+        </Button>
       </div>
     </form.Form>
   );
