@@ -13,7 +13,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 # Force rebuild to pick up new files (like the database)
-ARG CACHE_BUST=2026-01-01-v8-gallery-fix
+ARG CACHE_BUST=2026-01-01-v9-header-overlap-fix
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
