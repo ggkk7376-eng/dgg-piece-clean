@@ -115,7 +115,9 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
     // Close any open item when pathname changes (navigation)
     // Close any open item when pathname changes or user navigates via hash/clicks
     useEffect(() => {
+        // Reset both item and category on navigation (home click etc)
         setOpenItemId(null);
+        setActiveCategory(null);
 
         const handleHashChange = () => setOpenItemId(null);
         window.addEventListener("hashchange", handleHashChange);
