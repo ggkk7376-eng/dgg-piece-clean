@@ -112,30 +112,26 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
     const [openItemId, setOpenItemId] = useState<string | null>(null);
     const pathname = usePathname();
 
-    // Close any open item when pathname changes (navigation)
-    // Close any open item when pathname changes or user navigates via hash/clicks
+    // Close gallery when clicking outside
     useEffect(() => {
-        // Reset both item and category on navigation (home click etc)
-        setOpenItemId(null);
-        setActiveCategory(null);
-
-        const handleHashChange = () => setOpenItemId(null);
-        window.addEventListener("hashchange", handleHashChange);
-
-        const handleClick = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            const link = target.closest("a");
-            if (link) {
-                setOpenItemId(null);
+        const handleClickOutside = (event: MouseEvent) => {
+            const galleryElement = document.getElementById(`gallery-${title?.toLowerCase().replace(/\s+/g, '-')}`);
+            if (activeCategory && galleryElement && !galleryElement.contains(event.target as Node)) {
+                // Check if the click was on a button that toggles the category (to avoid conflict)
+                // Actually, simpler: if click is outside the main gallery container, close it.
+                setActiveCategory(null);
             }
         };
-        document.addEventListener("click", handleClick);
 
+        // Reset on navigation
+        setActiveCategory(null);
+        setOpenItemId(null);
+
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            window.removeEventListener("hashchange", handleHashChange);
-            document.removeEventListener("click", handleClick);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [pathname]);
+    }, [pathname, activeCategory, title]);
 
     if (!items || items.length === 0) return null;
 
@@ -151,7 +147,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
     const filteredItems = items.filter((item) => item.category === activeCategory);
 
     return (
-        <div className="container mx-auto py-12 px-4">
+        <div id={`gallery-${title?.toLowerCase().replace(/\s+/g, '-')}`} className="container mx-auto py-12 px-4">
             <div className="mb-12 text-center">
                 {title && <h2 className="text-3xl font-bold mb-8">{title}</h2>}
                 <div className="flex flex-wrap justify-center gap-2 md:gap-4">
