@@ -14,6 +14,9 @@ services:
       # Secrets should be moved to .env on the server for security
       PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
       NEXT_PUBLIC_SERVER_URL: "${NEXT_PUBLIC_SERVER_URL}"
+      SMTP_HOST: "${SMTP_HOST}"
+      SMTP_USER: "${SMTP_USER}"
+      SMTP_PASS: "${SMTP_PASS}"
       # SQLite database is used, so we don't need POSTGRES_URL
       DATABASE_URI: file:/app/sqlite_data/dgg-piece.db
     # Startup script: Copy DB from image if persistent file is missing OR EMPTY (0 bytes)

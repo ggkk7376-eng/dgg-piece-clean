@@ -32,7 +32,21 @@ export async function POST(req: NextRequest) {
         });
 
         const emailSettings = settings.email;
-        const { host, port, username, password, sender } = emailSettings || {};
+        let { host, port, username, password, sender } = emailSettings || {};
+
+        // Fallback to environment variables if CMS settings are missing
+        if (!host) {
+            console.log("[API send-email] CMS SMTP settings missing, falling back to Environment Variables");
+            host = process.env.SMTP_HOST;
+            username = process.env.SMTP_USER;
+            password = process.env.SMTP_PASS;
+            if (process.env.SMTP_PORT) port = parseInt(process.env.SMTP_PORT);
+        }
+
+        // Fallback sender if not configured
+        if (!sender) {
+            sender = process.env.SMTP_USER || "info@dggpiece.pl"; // Improve fallback
+        }
 
         if (!host || !username || !password || !sender) {
             console.error("Missing email configuration in CMS settings");
