@@ -115,6 +115,9 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
     // Close gallery when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
+            // Prevent closing category if a specific item dialog is open
+            if (openItemId) return;
+
             const galleryElement = document.getElementById(`gallery-${title?.toLowerCase().replace(/\s+/g, '-')}`);
             if (activeCategory && galleryElement && !galleryElement.contains(event.target as Node)) {
                 setActiveCategory(null);
@@ -128,7 +131,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, [activeCategory, title]);
+    }, [activeCategory, title, openItemId]);
 
     // Reset on navigation
     useEffect(() => {
