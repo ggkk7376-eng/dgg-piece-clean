@@ -85,7 +85,7 @@ const GalleryLightbox = ({
             className="fixed inset-0 z-[150] bg-black/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
             onClick={onClose}
         >
-            {/* Image Container - z-10 ensures it is below controls z-50 */}
+            {/* Image Container - z-10 ensures it is below controls */}
             <div
                 className="relative z-[10] w-full h-full p-0 md:p-4 flex items-center justify-center pointer-events-none"
             >
@@ -110,26 +110,29 @@ const GalleryLightbox = ({
                 </div>
             </div>
 
-            {/* Close button - z-50 to sit on top of everything */}
+            {/* Close button - z-200 to sit on top of everything */}
             <button
-                onClick={(e) => { e.stopPropagation(); onClose(); }}
-                className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[50]"
+                type="button"
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); onClose(); }}
+                className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[200] cursor-pointer pointer-events-auto"
             >
                 <X size={40} />
             </button>
 
-            {/* Navigation Buttons - z-50 */}
+            {/* Navigation Buttons - z-200 */}
             {images.length > 1 && (
                 <>
                     <button
-                        onClick={handlePrev}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]"
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); handlePrev(e); }}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[200] cursor-pointer pointer-events-auto"
                     >
                         <ChevronLeft size={48} />
                     </button>
                     <button
-                        onClick={handleNext}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]"
+                        type="button"
+                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleNext(e); }}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[200] cursor-pointer pointer-events-auto"
                     >
                         <ChevronRight size={48} />
                     </button>
