@@ -33,10 +33,109 @@ type Props = {
     items?: GalleryItemData[] | null;
 } & Record<string, any>;
 
+// --- Lightbox Component ---
+const GalleryLightbox = ({
+    images,
+    initialIndex,
+    onClose
+}: {
+    images: (Media & { url: string })[],
+    initialIndex: number,
+    onClose: () => void
+}) => {
+    const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+    // Update internal state if initialIndex changes (though usually we remount)
+    useEffect(() => {
+        setCurrentIndex(initialIndex);
+    }, [initialIndex]);
+
+    const handlePrev = useCallback((e?: React.MouseEvent) => {
+        e?.stopPropagation();
+        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+    }, [images.length]);
+
+    const handleNext = useCallback((e?: React.MouseEvent) => {
+        e?.stopPropagation();
+        setCurrentIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+    }, [images.length]);
+
+    // Keyboard navigation
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") onClose();
+            if (e.key === "ArrowLeft") handlePrev();
+            if (e.key === "ArrowRight") handleNext();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [handlePrev, handleNext, onClose]);
+
+    const currentImage = images[currentIndex];
+
+    if (!currentImage) return null;
+
+    return (
+        <div
+            className="fixed inset-0 z-[150] bg-black/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={onClose}
+        >
+            {/* Close button */}
+            <button
+                onClick={(e) => { e.stopPropagation(); onClose(); }}
+                className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[160]"
+            >
+                <X size={40} />
+            </button>
+
+            {/* Navigation Buttons */}
+            {images.length > 1 && (
+                <>
+                    <button
+                        onClick={handlePrev}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[160] hidden md:block"
+                    >
+                        <ChevronLeft size={48} />
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[160] hidden md:block"
+                    >
+                        <ChevronRight size={48} />
+                    </button>
+                </>
+            )}
+
+            {/* Image Container */}
+            <div
+                className="relative w-full h-full p-4 md:p-12 flex items-center justify-center"
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking image area (optional, users might expect click to close, but usually checking controls)
+            >
+                <div className="relative w-full h-full max-w-7xl max-h-full">
+                    <Image
+                        src={currentImage.url}
+                        alt={currentImage.alt || ""}
+                        fill
+                        className="object-contain"
+                        sizes="100vw"
+                        priority
+                    />
+                </div>
+
+                {/* Mobile Counter/Caption */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-sm font-medium px-4 py-2 bg-black/50 rounded-full">
+                    {currentIndex + 1} / {images.length}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // --- Carousel Component (Vertical Layout Optimized) ---
 const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
     const images = Array.isArray(item.images)
         ? item.images.filter(
@@ -72,37 +171,52 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
     if (images.length === 0) return <div className="h-64 flex items-center justify-center text-zinc-400">Brak zdjęcia</div>;
 
     return (
-        <div className="relative group overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900 w-full max-w-2xl mx-auto">
-            <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex">
-                    {images.map((image, index) => (
-                        <div key={image.id || index} className="relative flex-[0_0_100%] h-[400px] w-full">
-                            <Image
-                                src={image.url}
-                                alt={image.alt || item.title}
-                                fill
-                                className="object-contain"
-                                sizes="(max-width: 1024px) 100vw, 800px"
-                            />
-                        </div>
-                    ))}
+        <>
+            <div className="relative group overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900 w-full max-w-2xl mx-auto">
+                <div className="overflow-hidden" ref={emblaRef}>
+                    <div className="flex">
+                        {images.map((image, index) => (
+                            <div
+                                key={image.id || index}
+                                className="relative flex-[0_0_100%] h-[400px] w-full cursor-zoom-in"
+                                onClick={() => setLightboxIndex(index)}
+                            >
+                                <Image
+                                    src={image.url}
+                                    alt={image.alt || item.title}
+                                    fill
+                                    className="object-contain"
+                                    sizes="(max-width: 1024px) 100vw, 800px"
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
+
+                {images.length > 1 && (
+                    <>
+                        <button onClick={scrollPrev} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors">
+                            <ChevronLeft size={24} />
+                        </button>
+                        <button onClick={scrollNext} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors">
+                            <ChevronRight size={24} />
+                        </button>
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-3 py-1 rounded-full pointer-events-none">
+                            {currentIndex + 1} / {images.length}
+                        </div>
+                    </>
+                )}
             </div>
 
-            {images.length > 1 && (
-                <>
-                    <button onClick={scrollPrev} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors">
-                        <ChevronLeft size={24} />
-                    </button>
-                    <button onClick={scrollNext} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 transition-colors">
-                        <ChevronRight size={24} />
-                    </button>
-                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white text-xs px-3 py-1 rounded-full">
-                        {currentIndex + 1} / {images.length}
-                    </div>
-                </>
+            {/* Lightbox Overlay */}
+            {lightboxIndex !== null && (
+                <GalleryLightbox
+                    images={images}
+                    initialIndex={lightboxIndex}
+                    onClose={() => setLightboxIndex(null)}
+                />
             )}
-        </div>
+        </>
     );
 };
 
