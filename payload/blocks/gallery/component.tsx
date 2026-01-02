@@ -84,33 +84,7 @@ const GalleryLightbox = ({
             className="fixed inset-0 z-[150] bg-black/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
             onClick={onClose}
         >
-            {/* Close button */}
-            <button
-                onClick={(e) => { e.stopPropagation(); onClose(); }}
-                className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[160]"
-            >
-                <X size={40} />
-            </button>
-
-            {/* Navigation Buttons */}
-            {images.length > 1 && (
-                <>
-                    <button
-                        onClick={handlePrev}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[160] hidden md:block"
-                    >
-                        <ChevronLeft size={48} />
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[160] hidden md:block"
-                    >
-                        <ChevronRight size={48} />
-                    </button>
-                </>
-            )}
-
-            {/* Image Container */}
+            {/* Image Container - Render first so controls sit on top */}
             <div
                 className="relative w-full h-full p-0 md:p-4 flex items-center justify-center pointer-events-none"
             >
@@ -134,6 +108,32 @@ const GalleryLightbox = ({
                     {currentIndex + 1} / {images.length}
                 </div>
             </div>
+
+            {/* Close button - Render after image container */}
+            <button
+                onClick={(e) => { e.stopPropagation(); onClose(); }}
+                className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[160]"
+            >
+                <X size={40} />
+            </button>
+
+            {/* Navigation Buttons - Render after image container */}
+            {images.length > 1 && (
+                <>
+                    <button
+                        onClick={handlePrev}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[160]"
+                    >
+                        <ChevronLeft size={48} />
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[160]"
+                    >
+                        <ChevronRight size={48} />
+                    </button>
+                </>
+            )}
         </div>,
         document.body
     );
