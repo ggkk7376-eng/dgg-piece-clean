@@ -108,10 +108,13 @@ const GalleryLightbox = ({
 
             {/* Image Container */}
             <div
-                className="relative w-full h-full p-4 md:p-12 flex items-center justify-center"
-                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking image area (optional, users might expect click to close, but usually checking controls)
+                className="relative w-full h-full p-0 md:p-4 flex items-center justify-center pointer-events-none"
             >
-                <div className="relative w-full h-full max-w-7xl max-h-full">
+                {/* Inner wrapper blocks clicks so image doesn't close lightbox, but background does. Pointer events re-enabled. */}
+                <div
+                    className="relative w-full h-full max-w-[95vw] pointer-events-auto"
+                    onClick={(e) => e.stopPropagation()}
+                >
                     <Image
                         src={currentImage.url}
                         alt={currentImage.alt || ""}
@@ -123,7 +126,7 @@ const GalleryLightbox = ({
                 </div>
 
                 {/* Mobile Counter/Caption */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-sm font-medium px-4 py-2 bg-black/50 rounded-full">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-sm font-medium px-4 py-2 bg-black/50 rounded-full z-[160] pointer-events-auto">
                     {currentIndex + 1} / {images.length}
                 </div>
             </div>
