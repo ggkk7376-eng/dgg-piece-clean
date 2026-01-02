@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import type { Media } from "@/payload-types";
 import useEmblaCarousel from "embla-carousel-react";
@@ -75,7 +76,10 @@ const GalleryLightbox = ({
 
     if (!currentImage) return null;
 
-    return (
+    // Use Portal to escape parent stacking context
+    if (typeof document === 'undefined') return null;
+
+    return createPortal(
         <div
             className="fixed inset-0 z-[150] bg-black/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
             onClick={onClose}
@@ -130,7 +134,8 @@ const GalleryLightbox = ({
                     {currentIndex + 1} / {images.length}
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 
