@@ -183,6 +183,7 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
     if (images.length === 0) return <div className="h-64 flex items-center justify-center text-zinc-400">Brak zdjęcia</div>;
 
     return (
+<<<<<<< HEAD
         <>
             <div className="relative group overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900 w-full max-w-2xl mx-auto">
                 <div className="overflow-hidden" ref={emblaRef}>
@@ -203,6 +204,22 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
                             </div>
                         ))}
                     </div>
+=======
+        <div className="relative group overflow-hidden rounded-lg bg-white w-full max-w-2xl mx-auto">
+            <div className="overflow-hidden" ref={emblaRef}>
+                <div className="flex">
+                    {images.map((image, index) => (
+                        <div key={image.id || index} className="relative flex-[0_0_100%] h-[400px] w-full">
+                            <Image
+                                src={image.url}
+                                alt={image.alt || item.title}
+                                fill
+                                className="object-contain"
+                                sizes="(max-width: 1024px) 100vw, 800px"
+                            />
+                        </div>
+                    ))}
+>>>>>>> 2f182b0 (Style: Change lightbox background to white for Gallery and Realizations)
                 </div>
 
                 {images.length > 1 && (
@@ -220,6 +237,7 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
                 )}
             </div>
 
+<<<<<<< HEAD
             {/* Lightbox Overlay */}
             {lightboxIndex !== null && (
                 <GalleryLightbox
@@ -227,6 +245,20 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
                     initialIndex={lightboxIndex}
                     onClose={() => setLightboxIndex(null)}
                 />
+=======
+            {images.length > 1 && (
+                <>
+                    <button onClick={scrollPrev} className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/5 text-zinc-900 p-3 rounded-full hover:bg-black/10 transition-colors">
+                        <ChevronLeft size={24} />
+                    </button>
+                    <button onClick={scrollNext} className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/5 text-zinc-900 p-3 rounded-full hover:bg-black/10 transition-colors">
+                        <ChevronRight size={24} />
+                    </button>
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/80 text-black text-xs px-3 py-1 rounded-full shadow-sm">
+                        {currentIndex + 1} / {images.length}
+                    </div>
+                </>
+>>>>>>> 2f182b0 (Style: Change lightbox background to white for Gallery and Realizations)
             )}
         </>
     );
@@ -326,7 +358,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                             <DialogTrigger asChild>
                                 <div className="group cursor-pointer flex flex-col border rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all bg-card h-full">
                                     {/* Reduced height from h-64 to h-48 */}
-                                    <div className="relative h-48 w-full bg-zinc-50 dark:bg-black/40 overflow-hidden flex items-center justify-center">
+                                    <div className="relative h-48 w-full bg-white overflow-hidden flex items-center justify-center">
                                         {validFirstImage ? (
                                             <Image
                                                 src={firstImage.url!}
@@ -335,7 +367,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                                                 className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
                                             />
                                         ) : (
-                                            <div className="text-zinc-400 text-sm">Brak zdjęcia</div>
+                                            <div className="text-zinc-300 text-sm">Brak zdjęcia</div>
                                         )}
                                         <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
                                             <span className="bg-primary text-primary-foreground px-2 py-1 rounded text-xs shado-sm">Pokaż</span>
@@ -355,15 +387,23 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                                 </div>
                             </DialogTrigger>
 
-                            <DialogContent className="max-w-6xl w-[95vw] max-h-[90vh] overflow-y-auto p-0 gap-0 bg-background border-border">
+                            <DialogContent className="max-w-6xl w-[95vw] max-h-[90vh] overflow-y-auto p-0 gap-0 bg-white text-zinc-900 border-border">
                                 <div className="sr-only">
                                     <DialogTitle>{item.title}</DialogTitle>
                                     <DialogDescription>Szczegóły: {item.title}</DialogDescription>
                                 </div>
+                                {/* Close button inside content for better visibility on white */}
+                                <button
+                                    onClick={() => setOpenItemId(null)}
+                                    className="absolute right-4 top-4 z-50 p-2 rounded-full bg-black/5 hover:bg-black/10 transition-colors"
+                                >
+                                    <X className="h-6 w-6 text-zinc-900" />
+                                    <span className="sr-only">Close</span>
+                                </button>
 
                                 <div className="flex flex-col">
                                     {/* Top: Image Section */}
-                                    <div className="w-full bg-zinc-50 dark:bg-black/50 p-6 md:p-10 border-b border-border text-center">
+                                    <div className="w-full bg-white p-6 md:p-10 border-b border-border text-center">
                                         <GalleryCarousel item={item} />
                                     </div>
 

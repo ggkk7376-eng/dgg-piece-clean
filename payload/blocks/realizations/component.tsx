@@ -93,7 +93,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                 </button>
             </DialogTrigger>
 
-            <DialogContent className="max-w-[100vw] w-screen h-screen p-0 bg-black/90 border-none shadow-none flex flex-col items-center justify-center outline-none">
+            <DialogContent className="max-w-[100vw] w-screen h-screen p-0 bg-white/95 border-none shadow-none flex flex-col items-center justify-center outline-none">
                 {/* Accessibility Titles */}
                 <div className="sr-only">
                     <DialogTitle>Galeria Realizacji</DialogTitle>
@@ -103,7 +103,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                 {/* Close Button Custom */}
                 <button
                     onClick={() => setOpen(false)}
-                    className="absolute top-8 right-8 z-50 bg-white/10 text-white p-3 rounded-full hover:bg-white/20 transition-colors backdrop-blur-md"
+                    className="absolute top-8 right-8 z-50 bg-black/5 text-zinc-900 p-3 rounded-full hover:bg-black/10 transition-colors backdrop-blur-md"
                 >
                     <X size={32} />
                 </button>
@@ -122,7 +122,11 @@ export function Realizations({ triggerLabel, slides }: Props) {
                                     <div
                                         key={slide.id || index}
                                         className={cn(
+<<<<<<< HEAD
                                             "flex-[0_0_85%] md:flex-[0_0_90%] min-w-0 px-4 transition-all duration-500 ease-in-out transform h-[75vh] md:h-[90vh] flex flex-col items-center justify-center",
+=======
+                                            "flex-[0_0_85%] md:flex-[0_0_65%] min-w-0 px-4 transition-all duration-500 ease-in-out transform h-[60vh] md:h-[80vh] flex flex-col items-center justify-center",
+>>>>>>> 2f182b0 (Style: Change lightbox background to white for Gallery and Realizations)
                                             isActive ? "opacity-100 z-10 scale-100" : "opacity-30 grayscale scale-90"
                                         )}
                                     >
@@ -137,7 +141,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                                                     priority={isActive}
                                                 />
                                             ) : (
-                                                <div className="flex items-center justify-center h-full text-zinc-500 bg-zinc-900">Brak zdjęcia</div>
+                                                <div className="flex items-center justify-center h-full text-zinc-400 bg-zinc-100">Brak zdjęcia</div>
                                             )}
                                         </div>
                                         {/* Caption only for active slide */}
@@ -145,7 +149,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                                             "mt-6 text-center transition-opacity duration-300",
                                             isActive ? "opacity-100" : "opacity-0"
                                         )}>
-                                            <p className="text-white text-lg md:text-xl font-medium drop-shadow-md bg-black/40 inline-block px-4 py-1 rounded-full backdrop-blur-sm">
+                                            <p className="text-white text-lg md:text-xl font-medium drop-shadow-md bg-black/60 inline-block px-4 py-1 rounded-full backdrop-blur-sm">
                                                 {slide.description}
                                             </p>
                                         </div>
@@ -158,13 +162,13 @@ export function Realizations({ triggerLabel, slides }: Props) {
                     {/* Navigation Arrows */}
                     <button
                         onClick={scrollPrev}
-                        className="absolute left-2 md:-left-12 top-1/2 -translate-y-1/2 bg-white/10 text-white p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm z-20"
+                        className="absolute left-2 md:-left-12 top-1/2 -translate-y-1/2 bg-black/5 text-zinc-900 p-4 rounded-full hover:bg-black/10 hover:scale-110 transition-all backdrop-blur-sm z-20"
                     >
                         <ChevronLeft size={40} />
                     </button>
                     <button
                         onClick={scrollNext}
-                        className="absolute right-2 md:-right-12 top-1/2 -translate-y-1/2 bg-white/10 text-white p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm z-20"
+                        className="absolute right-2 md:-right-12 top-1/2 -translate-y-1/2 bg-black/5 text-zinc-900 p-4 rounded-full hover:bg-black/10 hover:scale-110 transition-all backdrop-blur-sm z-20"
                     >
                         <ChevronRight size={40} />
                     </button>

@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  app:
+    container_name: dgg-piece
+    user: root
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3005:3000"
+    environment:
+      # Secrets should be moved to .env on the server for security
+      PAYLOAD_SECRET: "${PAYLOAD_SECRET}"
+      NEXT_PUBLIC_SERVER_URL: "${NEXT_PUBLIC_SERVER_URL}"
+      # SQLite database is used, so we don't need POSTGRES_URL
+      DATABASE_URI: file:/app/sqlite_data/dgg-piece.db
+    # Startup script: Copy DB from image if persistent file is missing OR EMPTY (0 bytes)
+    command: >
+      sh -c " mkdir -p /app/sqlite_data; chmod 777 /app/sqlite_data; if [ ! -s /app/sqlite_data/dgg-piece.db ]; then
+        echo 'Database missing or empty. Seeding from image...';
+        cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Seeding failed';
+      else
+        echo 'Database exists. Skipping seed.';
+      fi; chmod 666 /app/sqlite_data/dgg-piece.db; node server.js "
+    volumes:
+      - ./sqlite_data:/app/sqlite_data
+      - ./media:/app/media
+
+  tunnel:
+    container_name: dgg-piece-tunnel
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_EDGE_PORT=443
+      - TUNNEL_TOKEN=eyJhIjoiMDVmY2E1OWRiYmExOGRmNWJiY2UxNmU0MTI2ZDMzYjAiLCJ0IjoiNzYyYTUzZDItNjFiZi00ODBjLThkODktYzlkM2ZlOTA0OWY1IiwicyI6IlptUmhaalprWldNdE1tUmlaaTAwTnpjM0xXRTVNMkl0WTJGaFkyVXpORFUzWlRjeCJ9

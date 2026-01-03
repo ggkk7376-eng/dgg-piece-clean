@@ -33,6 +33,8 @@ yarn-error.log*
 # env files
 .env*
 *.db
+*.sqlite
+*.sqlite3
 
 # vercel
 .vercel
@@ -43,3 +45,12 @@ next-env.d.ts
 
 # payload uploads
 /media
+
+# Local archives and backups (Too large for git)
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.bak
+*.old
+*.tmp

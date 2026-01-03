@@ -1,0 +1,31 @@
+# Simple Dev Dockerfile for NAS
+FROM node:20-alpine
+# Force Rebuild 2025-12-16 v5
+
+WORKDIR /app
+
+RUN apk add --no-cache libc6-compat
+
+# Copy package files
+COPY package.json package-lock.json* bun.lock* ./
+
+# Install dependencies (including dev deps)
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Set Env
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED 1
+ENV PORT 3000
+
+ENV PAYLOAD_SECRET=dev_secret
+ENV DATABASE_URL=postgresql://payload:securepassword@postgres:5432/dgg-piece
+ENV NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+
+# Expose port
+EXPOSE 3000
+
+# Start in Dev mode
+CMD ["npm", "run", "dev"]
