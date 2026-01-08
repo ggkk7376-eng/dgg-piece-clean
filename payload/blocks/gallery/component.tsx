@@ -181,7 +181,7 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
 
     return (
         <>
-            <div className="relative group overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-900 w-full max-w-2xl mx-auto">
+            <div className="relative group overflow-hidden rounded-lg bg-zinc-100 w-full max-w-2xl mx-auto border border-zinc-200">
                 <div className="overflow-hidden" ref={emblaRef}>
                     <div className="flex">
                         {images.map((image, index) => (
@@ -360,7 +360,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
 
                                 <div className="flex flex-col">
                                     {/* Top: Image Section */}
-                                    <div className="w-full bg-zinc-50 dark:bg-black/50 p-6 md:p-10 border-b border-border text-center">
+                                    <div className="w-full bg-zinc-50 p-6 md:p-10 border-b border-border text-center">
                                         <GalleryCarousel item={item} />
                                     </div>
 
