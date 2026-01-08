@@ -49,6 +49,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 # Directly copy from build context (safer than from builder)
 COPY dgg-piece.db /app/dgg-piece-seed.db
 
+# Install sqlite3 for manual DB maintenance
+RUN apt-get update && apt-get install -y sqlite3
+COPY scripts/fix.sql ./fix.sql
+
 USER nextjs
 
 EXPOSE 3000
