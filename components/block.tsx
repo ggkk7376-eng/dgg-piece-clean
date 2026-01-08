@@ -7,6 +7,7 @@ import { Headline } from "@/payload/blocks/headline/component";
 import { Section } from "@/payload/blocks/section/component";
 import { StatusAlert } from "@/payload/blocks/status-alert/component";
 import { Text } from "@/payload/blocks/text/component";
+import { RichText } from "@/payload/blocks/rich-text/component";
 import { Gallery } from "@/payload/blocks/gallery/component";
 import { Realizations } from "@/payload/blocks/realizations/component";
 import { TwoColumns } from "@/payload/blocks/two-columns/component";
@@ -21,6 +22,7 @@ const blockComponents: any = {
   section: Section,
   "status-alert": StatusAlert,
   text: Text,
+  richText: RichText,
   "contact-form": ContactForm,
   gallery: Gallery,
   realizations: Realizations,
