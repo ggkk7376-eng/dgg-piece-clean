@@ -92,16 +92,16 @@ const GalleryLightbox = ({
                 </div>
             </div>
 
-            <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[50]">
+            <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[50]" aria-label="Zamknij podgląd">
                 <X size={40} />
             </button>
 
             {images.length > 1 && (
                 <>
-                    <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]">
+                    <button onClick={handlePrev} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]" aria-label="Poprzednie zdjęcie">
                         <ChevronLeft size={48} />
                     </button>
-                    <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]">
+                    <button onClick={handleNext} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]" aria-label="Następne zdjęcie">
                         <ChevronRight size={48} />
                     </button>
                 </>
@@ -167,7 +167,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
-                <button type="button" className="group">
+                <button type="button" className="group" aria-label={`Otwórz galerię: ${triggerLabel}`}>
                     <EnterAnimationBlur className="flex cursor-pointer items-center justify-center gap-1 rounded-lg border border-[#212121] bg-[radial-gradient(66%_93%_at_48%_0%,#262626_0%,var(--color-dark-600)_76%)] px-7 py-4 font-sans transition-all hover:border-accent hover:shadow-[0_0_15px_-3px_var(--accent)]">
                         <Flipper asChild>
                             <Text variant="p2" asChild>
@@ -256,12 +256,14 @@ export function Realizations({ triggerLabel, slides }: Props) {
                     <button
                         onClick={scrollPrev}
                         className="absolute left-2 md:-left-12 top-1/2 -translate-y-1/2 bg-white/10 text-white p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm z-20"
+                        aria-label="Poprzednie zdjęcie"
                     >
                         <ChevronLeft size={40} />
                     </button>
                     <button
                         onClick={scrollNext}
                         className="absolute right-2 md:-right-12 top-1/2 -translate-y-1/2 bg-white/10 text-white p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm z-20"
+                        aria-label="Następne zdjęcie"
                     >
                         <ChevronRight size={40} />
                     </button>
