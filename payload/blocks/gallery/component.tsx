@@ -187,7 +187,7 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
                         {images.map((image, index) => (
                             <div
                                 key={image.id || index}
-                                className="relative group/slide flex-[0_0_100%] h-[400px] w-full cursor-zoom-in"
+                                className="relative group flex-[0_0_100%] h-[400px] w-full cursor-zoom-in"
                                 onClick={() => setLightboxIndex(index)}
                             >
                                 <Image
@@ -197,8 +197,8 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
                                     className="object-contain"
                                     sizes="(max-width: 1024px) 100vw, 800px"
                                 />
-                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/slide:opacity-100 transition-opacity bg-black/5 z-20">
-                                    <div className="bg-black/70 text-white p-4 rounded-full shadow-lg backdrop-blur-sm">
+                                <div className="absolute inset-0 flex items-center justify-center bg-black/5 z-20 transition-all duration-300">
+                                    <div className="bg-black/70 text-white p-4 rounded-full shadow-lg backdrop-blur-sm opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all">
                                         <ZoomIn size={36} />
                                     </div>
                                 </div>
