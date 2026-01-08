@@ -22,7 +22,7 @@ const blockComponents: any = {
   section: Section,
   "status-alert": StatusAlert,
   text: Text,
-  richText: RichText,
+  formattedText: RichText,
   "contact-form": ContactForm,
   gallery: Gallery,
   realizations: Realizations,
