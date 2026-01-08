@@ -22,7 +22,7 @@ export const RichText: React.FC<RichTextProps> = ({ content }) => {
                         {parts.map((part, index) => {
                             // Even index = regular text, Odd index = bold text
                             if (index % 2 === 1) {
-                                return <strong key={index}>{part}</strong>;
+                                return <strong key={index} className="text-inherit">{part}</strong>;
                             }
                             // Handle single newlines within paragraph as <br/>
                             return (
