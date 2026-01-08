@@ -93,7 +93,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                 </button>
             </DialogTrigger>
 
-            <DialogContent className="max-w-[100vw] w-screen h-screen p-0 bg-black/90 border-none shadow-none flex flex-col items-center justify-center outline-none">
+            <DialogContent className="max-w-[100vw] w-screen h-screen p-0 bg-white/95 border-none shadow-none flex flex-col items-center justify-center outline-none">
                 {/* Accessibility Titles */}
                 <div className="sr-only">
                     <DialogTitle>Galeria Realizacji</DialogTitle>
@@ -103,7 +103,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                 {/* Close Button Custom */}
                 <button
                     onClick={() => setOpen(false)}
-                    className="absolute top-8 right-8 z-50 bg-white/10 text-white p-3 rounded-full hover:bg-white/20 transition-colors backdrop-blur-md"
+                    className="absolute top-8 right-8 z-50 bg-black/5 text-black p-3 rounded-full hover:bg-black/10 transition-colors backdrop-blur-md"
                 >
                     <X size={32} />
                 </button>
@@ -145,7 +145,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                                             "mt-6 text-center transition-opacity duration-300",
                                             isActive ? "opacity-100" : "opacity-0"
                                         )}>
-                                            <p className="text-white text-lg md:text-xl font-medium drop-shadow-md bg-black/40 inline-block px-4 py-1 rounded-full backdrop-blur-sm">
+                                            <p className="text-black text-lg md:text-xl font-medium drop-shadow-sm bg-white/60 inline-block px-4 py-1 rounded-full backdrop-blur-sm border border-zinc-200">
                                                 {slide.description}
                                             </p>
                                         </div>
@@ -158,13 +158,13 @@ export function Realizations({ triggerLabel, slides }: Props) {
                     {/* Navigation Arrows */}
                     <button
                         onClick={scrollPrev}
-                        className="absolute left-2 md:-left-12 top-1/2 -translate-y-1/2 bg-white/10 text-white p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm z-20"
+                        className="absolute left-2 md:-left-12 top-1/2 -translate-y-1/2 bg-black/5 text-black p-4 rounded-full hover:bg-black/10 hover:scale-110 transition-all backdrop-blur-sm z-20"
                     >
                         <ChevronLeft size={40} />
                     </button>
                     <button
                         onClick={scrollNext}
-                        className="absolute right-2 md:-right-12 top-1/2 -translate-y-1/2 bg-white/10 text-white p-4 rounded-full hover:bg-white/20 hover:scale-110 transition-all backdrop-blur-sm z-20"
+                        className="absolute right-2 md:-right-12 top-1/2 -translate-y-1/2 bg-black/5 text-black p-4 rounded-full hover:bg-black/10 hover:scale-110 transition-all backdrop-blur-sm z-20"
                     >
                         <ChevronRight size={40} />
                     </button>
