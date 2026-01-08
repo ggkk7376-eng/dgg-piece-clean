@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY package.json package-lock.json* bun.lock* ./
 # Install dependencies appropriately
-RUN npm ci
+RUN npm install --legacy-peer-deps
 
 # Rebuild the source code only when needed
 FROM base AS builder
