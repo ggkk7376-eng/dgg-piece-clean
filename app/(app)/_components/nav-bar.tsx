@@ -39,7 +39,7 @@ export async function NavBar() {
   return (
     <NavBarRoot>
       <NavBarHeader>
-        <Link href="/" className="block h-[52px]">
+        <Link href="/" className="block h-[52px]" aria-label="Strona główna">
           <AppLogo className="h-full" />
         </Link>
 

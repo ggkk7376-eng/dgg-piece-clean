@@ -119,6 +119,7 @@ export function NavBarTrigger({
       onClick={toggle}
       {...props}
       className={cn("relative h-6 w-6 cursor-pointer", className)}
+      aria-label="Otwórz menu"
     >
       {children ?? (
         <>
