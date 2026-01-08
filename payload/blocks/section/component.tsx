@@ -17,11 +17,11 @@ export function Section({
         <section
           id={slug?.toLowerCase() ?? undefined}
           className={cn(
-            "flex w-full flex-col gap-6 px-5 py-6 md:py-10 first-of-type:pt-20 md:first-of-type:pt-24",
+            "flex w-full flex-col gap-4 px-5 py-2 md:py-6 first-of-type:pt-12 md:first-of-type:pt-16",
             className,
           )}
         >
-          <div className="relative flex flex-col items-center gap-6">
+          <div className="relative flex flex-col items-center gap-4">
             <TextProvider className="text-light-300">
               {children?.map((child: any) => (
                 <Block {...child} key={child.id} />
