@@ -25,7 +25,11 @@ const secondaryFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "DGG Piece",
+  title: {
+    default: "DGG Piece | Profesjonalne Piece Ceramiczne",
+    template: "%s | DGG Piece"
+  },
+  description: "Produkcja, serwis i modernizacja pieców ceramicznych. Najwyższa jakość, sterowniki TC, serwis gwarancyjny i pogwarancyjny.",
   icons: {
     icon: "/favicon.svg",
   },
