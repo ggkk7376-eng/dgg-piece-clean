@@ -40,12 +40,14 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="pl">
       <body
-        className={cn("dark", primaryFont.variable, secondaryFont.variable)}
+        className={cn("dark", primaryFont.variable, secondaryFont.variable, "flex min-h-screen flex-col")}
       >
         <LazyMotion features={domMax} strict>
-          {children}
+          <main className="flex-1">
+            {children}
+          </main>
           <Toaster />
           <Footer />
         </LazyMotion>

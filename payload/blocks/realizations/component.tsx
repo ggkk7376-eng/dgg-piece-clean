@@ -197,6 +197,7 @@ export function Realizations({ triggerLabel, slides }: Props) {
                 <button
                     onClick={() => setOpen(false)}
                     className="absolute top-8 right-8 z-50 bg-white/10 text-white p-3 rounded-full hover:bg-white/20 transition-colors backdrop-blur-md"
+                    aria-label="Zamknij galerię"
                 >
                     <X size={32} />
                 </button>

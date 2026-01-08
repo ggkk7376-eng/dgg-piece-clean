@@ -114,6 +114,7 @@ const GalleryLightbox = ({
             <button
                 onClick={(e) => { e.stopPropagation(); onClose(); }}
                 className="absolute top-4 right-4 text-black/70 hover:text-black p-2 rounded-full hover:bg-black/5 transition-colors z-[50]"
+                aria-label="Zamknij podgląd"
             >
                 <X size={40} />
             </button>
@@ -124,12 +125,14 @@ const GalleryLightbox = ({
                     <button
                         onClick={handlePrev}
                         className="absolute left-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[50]"
+                        aria-label="Poprzednie zdjęcie"
                     >
                         <ChevronLeft size={48} />
                     </button>
                     <button
                         onClick={handleNext}
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[50]"
+                        aria-label="Następne zdjęcie"
                     >
                         <ChevronRight size={48} />
                     </button>
