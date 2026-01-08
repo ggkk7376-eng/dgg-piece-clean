@@ -1,6 +1,9 @@
-CREATE TABLE IF NOT EXISTS "pages_blocks_rich_text" (
+DROP TABLE IF EXISTS "pages_blocks_rich_text";
+
+CREATE TABLE "pages_blocks_rich_text" (
   "_order" integer,
   "_parent_id" integer,
+  "_path" text,
   "id" text PRIMARY KEY NOT NULL,
   "content" text,
   "block_name" text,
@@ -9,3 +12,4 @@ CREATE TABLE IF NOT EXISTS "pages_blocks_rich_text" (
 
 CREATE INDEX IF NOT EXISTS "pages_blocks_rich_text_order_idx" ON "pages_blocks_rich_text" ("_order");
 CREATE INDEX IF NOT EXISTS "pages_blocks_rich_text_parent_id_idx" ON "pages_blocks_rich_text" ("_parent_id");
+CREATE INDEX IF NOT EXISTS "pages_blocks_rich_text_path_idx" ON "pages_blocks_rich_text" ("_path");
