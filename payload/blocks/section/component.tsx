@@ -17,7 +17,7 @@ export function Section({
         <section
           id={slug?.toLowerCase() ?? undefined}
           className={cn(
-            "flex w-full flex-col gap-4 px-5 py-2 md:py-6 first-of-type:pt-12 md:first-of-type:pt-16",
+            "flex w-full flex-col gap-4 px-5 py-2 md:py-6 first-of-type:pt-28 md:first-of-type:pt-32",
             className,
           )}
         >
