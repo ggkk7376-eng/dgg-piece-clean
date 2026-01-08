@@ -1,7 +1,7 @@
 import type { Block } from "payload";
 
 export const richText: Block = {
-    slug: "formattedText",
+    slug: "richText",
     labels: {
         singular: {
             en: "Rich Text",
