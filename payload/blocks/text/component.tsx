@@ -10,7 +10,7 @@ export interface TextState {
   className?: string;
 }
 
-const TextContext = createContext<TextState | undefined>(undefined);
+export const TextContext = createContext<TextState | undefined>(undefined);
 
 export function TextProvider({
   children,
