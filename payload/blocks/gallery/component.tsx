@@ -82,7 +82,7 @@ const GalleryLightbox = ({
     return createPortal(
         <div
             id="gallery-lightbox"
-            className="fixed inset-0 z-[150] bg-black/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
+            className="fixed inset-0 z-[150] bg-white/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
             onClick={onClose}
         >
             {/* Image Container - z-10 ensures it is below controls z-50 */}
@@ -105,7 +105,7 @@ const GalleryLightbox = ({
                 </div>
 
                 {/* Mobile Counter/Caption */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-sm font-medium px-4 py-2 bg-black/50 rounded-full z-[50] pointer-events-auto">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-black/80 text-sm font-medium px-4 py-2 bg-white/50 rounded-full z-[50] pointer-events-auto border border-zinc-200 shadow-sm">
                     {currentIndex + 1} / {images.length}
                 </div>
             </div>
@@ -113,7 +113,7 @@ const GalleryLightbox = ({
             {/* Close button - z-50 to sit on top of everything */}
             <button
                 onClick={(e) => { e.stopPropagation(); onClose(); }}
-                className="absolute top-4 right-4 text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors z-[50]"
+                className="absolute top-4 right-4 text-black/70 hover:text-black p-2 rounded-full hover:bg-black/5 transition-colors z-[50]"
             >
                 <X size={40} />
             </button>
@@ -123,13 +123,13 @@ const GalleryLightbox = ({
                 <>
                     <button
                         onClick={handlePrev}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[50]"
                     >
                         <ChevronLeft size={48} />
                     </button>
                     <button
                         onClick={handleNext}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-4 rounded-full hover:bg-white/10 transition-colors z-[50]"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[50]"
                     >
                         <ChevronRight size={48} />
                     </button>
