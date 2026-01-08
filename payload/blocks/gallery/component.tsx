@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import type { Media } from "@/payload-types";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
     Dialog,
@@ -197,6 +197,11 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
                                     className="object-contain"
                                     sizes="(max-width: 1024px) 100vw, 800px"
                                 />
+                                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10">
+                                    <div className="bg-black/60 text-white p-3 rounded-full">
+                                        <ZoomIn size={32} />
+                                    </div>
+                                </div>
                             </div>
                         ))}
                     </div>
