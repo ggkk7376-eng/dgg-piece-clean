@@ -26,7 +26,11 @@ services:
         cp -f /app/dgg-piece-seed.db /app/sqlite_data/dgg-piece.db || echo 'Warning: Seeding failed';
       else
         echo 'Database exists. Skipping seed.';
-      fi; chmod 666 /app/sqlite_data/dgg-piece.db; node server.js "
+      fi; 
+      # Auto-apply DB patches for missing tables (Safe/Idempotent)
+      sqlite3 /app/sqlite_data/dgg-piece.db < fix.sql;
+      chmod 666 /app/sqlite_data/dgg-piece.db; 
+      node server.js "
     volumes:
       - ./sqlite_data:/app/sqlite_data
       - ./media:/app/media

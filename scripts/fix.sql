@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS "pages_blocks_formatted_text";
-
-CREATE TABLE "pages_blocks_formatted_text" (
+CREATE TABLE IF NOT EXISTS "pages_blocks_formatted_text" (
   "_order" integer,
   "_parent_id" integer,
   "_path" text,
