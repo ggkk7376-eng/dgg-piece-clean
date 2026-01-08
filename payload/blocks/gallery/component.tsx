@@ -197,11 +197,6 @@ const GalleryCarousel = ({ item }: { item: GalleryItemData }) => {
                                     className="object-contain"
                                     sizes="(max-width: 1024px) 100vw, 800px"
                                 />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/5 z-20 transition-all duration-300">
-                                    <div className="bg-black/70 text-white p-4 rounded-full shadow-lg backdrop-blur-sm opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all">
-                                        <ZoomIn size={36} />
-                                    </div>
-                                </div>
                             </div>
                         ))}
                     </div>
