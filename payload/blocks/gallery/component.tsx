@@ -87,65 +87,73 @@ const GalleryLightbox = ({
     };
 
     return createPortal(
-        <div
-            id="gallery-lightbox"
-            className="fixed inset-0 z-[150] bg-white/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
-            onClick={handleBackdropClick}
-        >
-            {/* Image Container - z-10 ensures it is below controls z-50 */}
+        <>
+            {/* Layer 1: Backdrop & Content (z-[150]) */}
             <div
-                className="relative z-[10] w-full h-full p-0 md:p-4 flex items-center justify-center pointer-events-none"
+                id="gallery-lightbox-backdrop"
+                className="fixed inset-0 z-[150] bg-white/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
+                onClick={handleBackdropClick}
             >
-                {/* Inner wrapper blocks clicks so image doesn't close lightbox, but background does. Pointer events re-enabled. */}
-                <div
-                    className="relative w-full h-full max-w-[95vw] pointer-events-auto"
-                    onClick={(e) => e.stopPropagation()}
-                >
-                    <Image
-                        src={currentImage.url}
-                        alt={currentImage.alt || ""}
-                        fill
-                        className="object-contain"
-                        sizes="100vw"
-                        priority
-                    />
-                </div>
-
-                {/* Mobile Counter/Caption */}
-                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-black/80 text-sm font-medium px-4 py-2 bg-white/50 rounded-full z-[200] pointer-events-auto border border-zinc-200 shadow-sm">
-                    {currentIndex + 1} / {images.length}
+                {/* Image Container */}
+                <div className="relative w-full h-full p-0 md:p-4 flex items-center justify-center pointer-events-none">
+                    <div
+                        className="relative w-full h-full max-w-[95vw] pointer-events-auto"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <Image
+                            src={currentImage.url}
+                            alt={currentImage.alt || ""}
+                            fill
+                            className="object-contain"
+                            sizes="100vw"
+                            priority
+                        />
+                    </div>
                 </div>
             </div>
 
-            {/* Close button - z-200 to GUARANTEE top layer */}
-            <button
-                onClick={(e) => { e.stopPropagation(); onClose(); }}
-                className="absolute top-4 right-4 text-black/60 hover:text-black p-3 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all z-[200] cursor-pointer shadow-sm hover:shadow-md"
-                aria-label="Zamknij podgląd"
-            >
-                <X size={32} />
-            </button>
+            {/* Layer 2: UI Controls (z-[200]) - Strictly on top, pass-through clicks elsewhere */}
+            <div className="fixed inset-0 z-[200] pointer-events-none flex flex-col justify-between p-4">
 
-            {/* Navigation Buttons - z-200 */}
-            {images.length > 1 && (
-                <>
+                {/* Top Row: Close Button */}
+                <div className="flex justify-end w-full">
                     <button
-                        onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-black/60 hover:text-black p-4 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all z-[200] cursor-pointer shadow-sm hover:shadow-md"
-                        aria-label="Poprzednie zdjęcie"
+                        onClick={(e) => { e.stopPropagation(); onClose(); }}
+                        className="pointer-events-auto text-black/60 hover:text-black p-3 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all cursor-pointer shadow-sm hover:shadow-md"
+                        aria-label="Zamknij podgląd"
                     >
-                        <ChevronLeft size={48} />
+                        <X size={32} />
                     </button>
-                    <button
-                        onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-black/60 hover:text-black p-4 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all z-[200] cursor-pointer shadow-sm hover:shadow-md"
-                        aria-label="Następne zdjęcie"
-                    >
-                        <ChevronRight size={48} />
-                    </button>
-                </>
-            )}
-        </div>,
+                </div>
+
+                {/* Middle Row: Navigation (Absolute centered vertically) */}
+                {images.length > 1 && (
+                    <>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); handlePrev(); }}
+                            className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-auto text-black/60 hover:text-black p-4 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all cursor-pointer shadow-sm hover:shadow-md"
+                            aria-label="Poprzednie zdjęcie"
+                        >
+                            <ChevronLeft size={48} />
+                        </button>
+                        <button
+                            onClick={(e) => { e.stopPropagation(); handleNext(); }}
+                            className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-auto text-black/60 hover:text-black p-4 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all cursor-pointer shadow-sm hover:shadow-md"
+                            aria-label="Następne zdjęcie"
+                        >
+                            <ChevronRight size={48} />
+                        </button>
+                    </>
+                )}
+
+                {/* Bottom Row: Counter */}
+                <div className="flex justify-center w-full pointer-events-none">
+                    <div className="text-black/80 text-sm font-medium px-4 py-2 bg-white/50 rounded-full border border-zinc-200 shadow-sm pointer-events-auto">
+                        {currentIndex + 1} / {images.length}
+                    </div>
+                </div>
+            </div>
+        </>,
         document.body
     );
 };
