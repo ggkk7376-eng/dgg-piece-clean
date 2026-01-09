@@ -123,14 +123,14 @@ const GalleryLightbox = ({
             {images.length > 1 && (
                 <>
                     <button
-                        onClick={handlePrev}
+                        onClick={(e) => { e.stopPropagation(); handlePrev(); }}
                         className="absolute left-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
                         aria-label="Poprzednie zdjęcie"
                     >
                         <ChevronLeft size={48} />
                     </button>
                     <button
-                        onClick={handleNext}
+                        onClick={(e) => { e.stopPropagation(); handleNext(); }}
                         className="absolute right-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
                         aria-label="Następne zdjęcie"
                     >
