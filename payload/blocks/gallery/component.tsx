@@ -79,65 +79,66 @@ const GalleryLightbox = ({
     // Use Portal to escape parent stacking context
     if (typeof document === 'undefined') return null;
 
-    <div
-        id="gallery-lightbox"
-        className="fixed inset-0 z-[150] bg-white/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
-        onClick={onClose}
-    >
-        {/* Image Container - z-10 ensures it is below controls z-50 */}
+    return createPortal(
         <div
-            className="relative z-[10] w-full h-full p-0 md:p-4 flex items-center justify-center pointer-events-none"
+            id="gallery-lightbox"
+            className="fixed inset-0 z-[150] bg-white/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={onClose}
         >
-            {/* Inner wrapper blocks clicks so image doesn't close lightbox, but background does. Pointer events re-enabled. */}
+            {/* Image Container - z-10 ensures it is below controls z-50 */}
             <div
-                className="relative w-full h-full max-w-[95vw] pointer-events-auto"
-                onClick={(e) => e.stopPropagation()}
+                className="relative z-[10] w-full h-full p-0 md:p-4 flex items-center justify-center pointer-events-none"
             >
-                <Image
-                    src={currentImage.url}
-                    alt={currentImage.alt || ""}
-                    fill
-                    className="object-contain"
-                    sizes="100vw"
-                    priority
-                />
+                {/* Inner wrapper blocks clicks so image doesn't close lightbox, but background does. Pointer events re-enabled. */}
+                <div
+                    className="relative w-full h-full max-w-[95vw] pointer-events-auto"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <Image
+                        src={currentImage.url}
+                        alt={currentImage.alt || ""}
+                        fill
+                        className="object-contain"
+                        sizes="100vw"
+                        priority
+                    />
+                </div>
+
+                {/* Mobile Counter/Caption */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-black/80 text-sm font-medium px-4 py-2 bg-white/50 rounded-full z-[200] pointer-events-auto border border-zinc-200 shadow-sm">
+                    {currentIndex + 1} / {images.length}
+                </div>
             </div>
 
-            {/* Mobile Counter/Caption */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-black/80 text-sm font-medium px-4 py-2 bg-white/50 rounded-full z-[200] pointer-events-auto border border-zinc-200 shadow-sm">
-                {currentIndex + 1} / {images.length}
-            </div>
-        </div>
+            {/* Close button - z-200 to GUARANTEE top layer */}
+            <button
+                onClick={(e) => { e.stopPropagation(); onClose(); }}
+                className="absolute top-4 right-4 text-black/70 hover:text-black p-2 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
+                aria-label="Zamknij podgląd"
+            >
+                <X size={40} />
+            </button>
 
-        {/* Close button - z-200 to GUARANTEE top layer */}
-        <button
-            onClick={(e) => { e.stopPropagation(); onClose(); }}
-            className="absolute top-4 right-4 text-black/70 hover:text-black p-2 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
-            aria-label="Zamknij podgląd"
-        >
-            <X size={40} />
-        </button>
-
-        {/* Navigation Buttons - z-200 */}
-        {images.length > 1 && (
-            <>
-                <button
-                    onClick={handlePrev}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
-                    aria-label="Poprzednie zdjęcie"
-                >
-                    <ChevronLeft size={48} />
-                </button>
-                <button
-                    onClick={handleNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
-                    aria-label="Następne zdjęcie"
-                >
-                    <ChevronRight size={48} />
-                </button>
-            </>
-        )}
-    </div>,
+            {/* Navigation Buttons - z-200 */}
+            {images.length > 1 && (
+                <>
+                    <button
+                        onClick={handlePrev}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
+                        aria-label="Poprzednie zdjęcie"
+                    >
+                        <ChevronLeft size={48} />
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
+                        aria-label="Następne zdjęcie"
+                    >
+                        <ChevronRight size={48} />
+                    </button>
+                </>
+            )}
+        </div>,
         document.body
     );
 };
