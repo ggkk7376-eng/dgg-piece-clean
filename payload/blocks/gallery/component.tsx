@@ -79,11 +79,18 @@ const GalleryLightbox = ({
     // Use Portal to escape parent stacking context
     if (typeof document === 'undefined') return null;
 
+    const handleBackdropClick = (e: React.MouseEvent) => {
+        // Only close if clicking the backdrop itself (not children)
+        if (e.target === e.currentTarget) {
+            onClose();
+        }
+    };
+
     return createPortal(
         <div
             id="gallery-lightbox"
             className="fixed inset-0 z-[150] bg-white/95 flex items-center justify-center backdrop-blur-sm animate-in fade-in duration-200"
-            onClick={onClose}
+            onClick={handleBackdropClick}
         >
             {/* Image Container - z-10 ensures it is below controls z-50 */}
             <div
@@ -113,10 +120,10 @@ const GalleryLightbox = ({
             {/* Close button - z-200 to GUARANTEE top layer */}
             <button
                 onClick={(e) => { e.stopPropagation(); onClose(); }}
-                className="absolute top-4 right-4 text-black/70 hover:text-black p-2 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
+                className="absolute top-4 right-4 text-black/60 hover:text-black p-3 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all z-[200] cursor-pointer shadow-sm hover:shadow-md"
                 aria-label="Zamknij podgląd"
             >
-                <X size={40} />
+                <X size={32} />
             </button>
 
             {/* Navigation Buttons - z-200 */}
@@ -124,14 +131,14 @@ const GalleryLightbox = ({
                 <>
                     <button
                         onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-black/60 hover:text-black p-4 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all z-[200] cursor-pointer shadow-sm hover:shadow-md"
                         aria-label="Poprzednie zdjęcie"
                     >
                         <ChevronLeft size={48} />
                     </button>
                     <button
                         onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-black/70 hover:text-black p-4 rounded-full hover:bg-black/5 transition-colors z-[200] cursor-pointer"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-black/60 hover:text-black p-4 rounded-full bg-white/50 hover:bg-zinc-200 border border-transparent hover:border-zinc-300 transition-all z-[200] cursor-pointer shadow-sm hover:shadow-md"
                         aria-label="Następne zdjęcie"
                     >
                         <ChevronRight size={48} />
