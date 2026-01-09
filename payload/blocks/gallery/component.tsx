@@ -370,7 +370,14 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                                 </div>
                             </DialogTrigger>
 
-                            <DialogContent className="max-w-6xl w-[95vw] max-h-[90vh] overflow-y-auto p-0 gap-0 bg-background border-border">
+                            <DialogContent className="max-w-6xl w-[95vw] max-h-[90vh] overflow-y-auto p-0 gap-0 bg-background border-border relative">
+                                <button
+                                    onClick={() => setOpenItemId(null)}
+                                    className="absolute top-4 right-4 z-50 p-2 rounded-full bg-black/5 hover:bg-black/10 text-black/60 hover:text-black transition-colors"
+                                    aria-label="Zamknij szczegóły"
+                                >
+                                    <X size={24} />
+                                </button>
                                 <div className="sr-only">
                                     <DialogTitle>{item.title}</DialogTitle>
                                     <DialogDescription>Szczegóły: {item.title}</DialogDescription>
