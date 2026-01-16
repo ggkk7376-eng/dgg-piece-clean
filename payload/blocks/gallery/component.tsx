@@ -403,7 +403,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                                             </div>
                                         </div>
 
-                                        <div className="prose dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
+                                        <div className="prose max-w-none leading-relaxed text-light-100 [&_*]:!text-light-100">
                                             {item.description ? (
                                                 typeof item.description === 'string' ? (
                                                     item.description.split('\n').map((line, i) => (
@@ -413,7 +413,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
                                                     <RichText data={item.description as any} />
                                                 )
                                             ) : (
-                                                <p className="italic text-zinc-400">Brak opisu.</p>
+                                                <p className="italic text-zinc-300">Brak opisu.</p>
                                             )}
                                         </div>
 
@@ -449,7 +449,7 @@ export const Gallery: React.FC<Props> = ({ title, items }) => {
             </div>
             {activeCategory && filteredItems.length === 0 && (
                 <div className="text-center py-24 border border-dashed rounded-xl">
-                    <p className="text-muted-foreground text-lg">Brak produktów w tej kategorii.</p>
+                    <p className="text-light-200 text-lg">Brak produktów w tej kategorii.</p>
                 </div>
             )}
         </div>

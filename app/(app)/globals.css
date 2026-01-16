@@ -154,4 +154,8 @@
   body {
     @apply bg-background text-foreground font-primary antialiased;
   }
+
+  .payload-lexical-content a {
+    @apply text-xl font-medium underline underline-offset-4 text-white hover:text-accent transition-colors block mt-4 mb-2;
+  }
 }

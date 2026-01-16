@@ -18,7 +18,7 @@ import type { Carousel as CarouselProps, Media } from "@/payload-types";
 export function Carousel({ text, images }: CarouselProps) {
   return (
     <div className="relative flex w-full flex-col gap-9 text-center">
-      <Text variant="p3" className="text-light-400">
+      <Text variant="p3" className="!text-white">
         <EnterAnimationBlurText>{text ?? ""}</EnterAnimationBlurText>
       </Text>
 

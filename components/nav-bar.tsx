@@ -25,6 +25,7 @@ import { useIsClient } from "@/hooks/use-is-client";
 import { cn } from "@/lib/utils";
 
 import { Text } from "./text";
+import { Slot } from "@radix-ui/react-slot";
 
 interface NavBarState {
   isOpen: boolean;
@@ -194,10 +195,12 @@ export function NavBarItem({
 export function NavBarAction({
   className,
   children,
+  asChild,
   ...props
-}: ComponentPropsWithRef<typeof m.button>) {
+}: ComponentPropsWithRef<typeof m.button> & { asChild?: boolean }) {
   const idleControls = useRef<AnimationPlaybackControls>(undefined);
   const inOutControls = useRef<AnimationPlaybackControls>(undefined);
+  const Comp = asChild ? Slot : m.button;
 
   const gradientX = useMotionValue("0%");
   const gradientY = useMotionValue("0%");
@@ -247,7 +250,8 @@ export function NavBarAction({
   };
 
   return (
-    <m.button
+    // @ts-expect-error - Motion/Slot styling types conflict
+    <Comp
       variants={{
         closed: { filter: "blur(10px)", scale: 0.8, opacity: 0 },
         open: { filter: "blur(0px)", scale: 1, opacity: 1 },
@@ -273,6 +277,6 @@ export function NavBarAction({
           {children}
         </m.div>
       </m.div>
-    </m.button>
+    </Comp>
   );
 }

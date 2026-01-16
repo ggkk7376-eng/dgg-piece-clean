@@ -37,6 +37,7 @@ export const metadata: Metadata = {
 
 import { Footer } from "@/components/footer";
 import { Toaster } from "sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export default function RootLayout({
   children,
@@ -46,15 +47,22 @@ export default function RootLayout({
   return (
     <html lang="pl">
       <body
-        className={cn("dark", primaryFont.variable, secondaryFont.variable, "flex min-h-screen flex-col")}
+        className={cn(primaryFont.variable, secondaryFont.variable, "flex min-h-screen flex-col bg-background text-foreground")}
       >
-        <LazyMotion features={domMax} strict>
-          <main className="flex-1">
-            {children}
-          </main>
-          <Toaster />
-          <Footer />
-        </LazyMotion>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <LazyMotion features={domMax} strict>
+            <main className="flex-1">
+              {children}
+            </main>
+            <Toaster />
+            <Footer />
+          </LazyMotion>
+        </ThemeProvider>
       </body>
     </html>
   );
