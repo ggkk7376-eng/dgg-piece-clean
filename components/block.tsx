@@ -11,6 +11,7 @@ import { RichText } from "@/payload/blocks/rich-text/component";
 import { Gallery } from "@/payload/blocks/gallery/component";
 import { Realizations } from "@/payload/blocks/realizations/component";
 import { TwoColumns } from "@/payload/blocks/two-columns/component";
+import { ImageAndText } from "@/payload/blocks/image-and-text/component";
 import type { Config } from "@/payload-types";
 
 type BlocksProps = Config["blocks"][keyof Config["blocks"]];
@@ -28,9 +29,10 @@ const blockComponents: any = {
   gallery: Gallery,
   realizations: Realizations,
   "two-columns": TwoColumns,
+  imageAndText: ImageAndText,
 };
 
-export function Block(props: BlocksProps) {
-  const Comp = blockComponents[props.blockType] as FC<BlocksProps>;
+export function Block(props: BlocksProps & { priority?: boolean }) {
+  const Comp = blockComponents[props.blockType] as FC<BlocksProps & { priority?: boolean }>;
   return <Comp {...props} />;
 }

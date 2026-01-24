@@ -57,5 +57,35 @@ export const section: Block = {
       },
       blocks: [button, carousel, headline, statusAlert, text, richText, contactForm, gallery, realizations],
     },
+    {
+      type: "upload",
+      name: "backgroundImage",
+      relationTo: "media",
+      label: {
+        en: "Background Image",
+        pl: "Zdjęcie w tle",
+      },
+      admin: {
+        description: {
+          en: "Background image for this section",
+          pl: "Zdjęcie w tle dla tej sekcji",
+        },
+      },
+    },
+    {
+      type: "checkbox",
+      name: "enableOverlay",
+      label: {
+        en: "Enable Overlay",
+        pl: "Włącz przyciemnienie",
+      },
+      defaultValue: false,
+      admin: {
+        description: {
+          en: "Adds a dark overlay to the background image",
+          pl: "Dodaje ciemną warstwę na zdjęcie w tle",
+        },
+      },
+    },
   ],
 };

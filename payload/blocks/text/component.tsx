@@ -26,7 +26,7 @@ export function Text({ text, variant }: TextProps) {
     <BaseText variant={variant} className={context?.className} asChild>
       <div>
         <EnterAnimationBlur>
-          <div className="payload-lexical-content flex flex-col gap-4 max-w-4xl mx-auto leading-relaxed text-center text-light-100 [&_*]:!text-white [&_*]:!opacity-100">
+          <div className="prose dark:prose-invert prose-strong:text-white max-w-none text-light-100 leading-relaxed text-center [&>p]:text-light-100 [&>h1]:text-white [&>h2]:text-white [&>h3]:text-white [&>strong]:text-white">
             {text ? (
               typeof text === 'string' ? (
                 <p>{text}</p>

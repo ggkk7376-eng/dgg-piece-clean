@@ -169,18 +169,21 @@ export function Realizations({ triggerLabel, slides }: Props) {
             <DialogTrigger asChild>
                 <button type="button" className="group" aria-label={`Otwórz galerię: ${triggerLabel}`}>
                     <EnterAnimationBlur className="flex cursor-pointer items-center justify-center gap-1 rounded-lg border border-[#212121] bg-[radial-gradient(66%_93%_at_48%_0%,#262626_0%,var(--color-dark-600)_76%)] px-7 py-4 font-sans transition-all hover:border-accent hover:shadow-[0_0_15px_-3px_var(--accent)]">
-                        <Flipper asChild>
-                            <Text variant="p2" asChild>
-                                <span className="flex items-center gap-2">
-                                    <span>{triggerLabel}</span>
-                                    <FlipperContent
-                                        className="h-6 w-6"
-                                        itemClassName="h-5 w-5 rotate-90"
-                                    >
-                                        <External />
-                                    </FlipperContent>
-                                </span>
-                            </Text>
+                        <Flipper>
+                            <span
+                                className={cn(
+                                    "flex items-center gap-2",
+                                    "not-last:mb-5 font-normal font-primary text-base leading-5.5 tracking-normal" // p2 variant from Text
+                                )}
+                            >
+                                <span>{triggerLabel}</span>
+                                <FlipperContent
+                                    className="h-6 w-6"
+                                    itemClassName="h-5 w-5 rotate-90"
+                                >
+                                    <External />
+                                </FlipperContent>
+                            </span>
                         </Flipper>
                     </EnterAnimationBlur>
                 </button>

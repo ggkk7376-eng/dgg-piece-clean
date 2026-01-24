@@ -25,7 +25,6 @@ import { useIsClient } from "@/hooks/use-is-client";
 import { cn } from "@/lib/utils";
 
 import { Text } from "./text";
-import { Slot } from "@radix-ui/react-slot";
 
 interface NavBarState {
   isOpen: boolean;
@@ -34,7 +33,7 @@ interface NavBarState {
 
 const NavBarContext = createContext<NavBarState | undefined>(undefined);
 
-function useNavBar() {
+export function useNavBar() {
   const context = use(NavBarContext);
   invariant(context, "useNavBar must be used within a NavBar");
   return context;
@@ -51,7 +50,7 @@ export function NavBar({ children }: { children: ReactNode }) {
         toggle: useCallback(() => setOpen((value) => !value), []),
       }}
     >
-      <nav className="-translate-x-1/2 fixed top-4 left-1/2 z-50 w-[90%] rounded-[40px] bg-gradient-to-b from-accent to-[rgba(33,33,33,0.4)] p-px">
+      <nav className="-translate-x-1/2 fixed top-4 left-1/2 z-50 w-[90%]">
         <m.div
           animate={isOpen ? "open" : "closed"}
           initial={isClient}
@@ -64,15 +63,26 @@ export function NavBar({ children }: { children: ReactNode }) {
               },
             },
             open: {
-              height: 399,
+              height: "auto",
               transition: {
                 when: "beforeChildren",
                 delayChildren: stagger(0.03),
               },
             },
           }}
-          className="flex min-h-[64px] flex-col gap-8 overflow-hidden rounded-[40px] bg-dark-600 px-8 py-2 transition-[height]"
+          className="relative flex min-h-[64px] flex-col gap-8 overflow-hidden rounded-[40px] bg-dark-600/30 backdrop-blur-md px-8 py-2 transition-[height]"
         >
+          {/* Gradient Border Ring (Masked to be border-only) */}
+          <div
+            className="absolute inset-0 rounded-[40px] p-px pointer-events-none"
+            style={{
+              background: "linear-gradient(to bottom, var(--accent), rgba(33,33,33,0.4))",
+              mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+              maskComposite: "exclude",
+              WebkitMaskComposite: "xor",
+            }}
+          />
           {children}
         </m.div>
       </nav>
@@ -172,7 +182,7 @@ export function NavBarItem({
     <Text
       variant="p2"
       className={cn(
-        "not-last:mb-0 text-light-400 transition-colors hover:text-light-200",
+        "not-last:mb-0 text-light-200 transition-colors hover:text-white",
         className,
       )}
       asChild
@@ -195,12 +205,10 @@ export function NavBarItem({
 export function NavBarAction({
   className,
   children,
-  asChild,
   ...props
-}: ComponentPropsWithRef<typeof m.button> & { asChild?: boolean }) {
+}: ComponentPropsWithRef<typeof m.button>) {
   const idleControls = useRef<AnimationPlaybackControls>(undefined);
   const inOutControls = useRef<AnimationPlaybackControls>(undefined);
-  const Comp = asChild ? Slot : m.button;
 
   const gradientX = useMotionValue("0%");
   const gradientY = useMotionValue("0%");
@@ -250,8 +258,7 @@ export function NavBarAction({
   };
 
   return (
-    // @ts-expect-error - Motion/Slot styling types conflict
-    <Comp
+    <m.button
       variants={{
         closed: { filter: "blur(10px)", scale: 0.8, opacity: 0 },
         open: { filter: "blur(0px)", scale: 1, opacity: 1 },
@@ -277,6 +284,6 @@ export function NavBarAction({
           {children}
         </m.div>
       </m.div>
-    </Comp>
+    </m.button>
   );
 }

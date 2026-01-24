@@ -49,8 +49,8 @@ export default async function Page({ params }: PageProps) {
 
       <NavBar />
 
-      {page.content?.map((block: any) => (
-        <Block {...block} key={block.id} />
+      {page.content?.map((block: any, index: number) => (
+        <Block {...block} key={block.id} priority={index <= 1} />
       ))}
     </>
   );

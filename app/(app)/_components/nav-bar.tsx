@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { payload } from "@/lib/payload";
-import { SearchModal } from "@/components/search-modal";
 
 import {
   NavBarContent,
@@ -12,7 +11,6 @@ import {
 
 import { AppLogo } from "./logo";
 import { DownloadsModal } from "@/components/downloads-modal";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { NewsButton } from "@/components/news-button";
 
 export async function NavBar() {
@@ -46,10 +44,7 @@ export async function NavBar() {
           <AppLogo className="h-full" />
         </Link>
 
-        <div className="flex items-center gap-2">
-          <SearchModal />
-          <NavBarTrigger />
-        </div>
+        <NavBarTrigger />
       </NavBarHeader>
 
       <NavBarContent>
@@ -58,11 +53,14 @@ export async function NavBar() {
             <Link href={item.url}>{item.label}</Link>
           </NavBarItem>
         ))}
+        {/* Centered actions container */}
+        <li className="w-full list-none">
+          <div className="flex flex-col items-center gap-6 w-full mt-2">
+            <NewsButton />
+            <DownloadsModal data={downloads as any} />
+          </div>
+        </li>
       </NavBarContent>
-
-      <ThemeToggle />
-      <DownloadsModal data={downloads as any} />
-      <NewsButton />
     </NavBarRoot>
   );
 }

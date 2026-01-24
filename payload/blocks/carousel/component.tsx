@@ -109,6 +109,7 @@ async function CarouselImage({
       width={size.width}
       height={size.height}
       className="h-8 w-auto object-contain"
+      sizes="(max-width: 768px) 150px, 200px"
     />
   );
 }

@@ -22,6 +22,7 @@ import { dialogs } from "./payload/collections/dialogs";
 import { media } from "./payload/collections/media";
 import { pages } from "./payload/collections/pages";
 import { users } from "./payload/collections/users";
+import { News } from "./payload/collections/News";
 import { downloads } from "./payload/globals/downloads";
 import { navigation } from "./payload/globals/navigation";
 import { settings } from "./payload/globals/settings";
@@ -33,7 +34,7 @@ const config = buildConfig({
     user: users.slug,
   },
   globals: [settings, downloads, navigation],
-  collections: [pages, media, users, dialogs],
+  collections: [pages, media, users, dialogs, News],
   blocks: [button, carousel, contactForm, gallery, headline, statusAlert, text, section, realizations],
   secret: env.PAYLOAD_SECRET,
   db: sqliteAdapter({
@@ -41,7 +42,7 @@ const config = buildConfig({
       url: process.env.DATABASE_URI || "file:./dgg-piece.db",
     },
     // Enable schema push to create tables on empty DB (since we have no migrations)
-    push: env.PAYLOAD_SECRET !== 'build_time_dummy_secret',
+    push: false,
   }),
   i18n: {
     fallbackLanguage: "pl",

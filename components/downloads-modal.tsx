@@ -38,7 +38,7 @@ export function DownloadsModal({ data }: { data: DownloadsData }) {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Flipper asChild>
+                <Flipper>
                     <NavBarAction>
                         <span>Pliki do pobrania</span>
                         <FlipperContent className="h-6 w-6" itemClassName="h-5 w-5">

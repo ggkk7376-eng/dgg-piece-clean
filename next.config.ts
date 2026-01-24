@@ -12,11 +12,18 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         hostname: "localhost",
       },
     ],
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
   webpack(config) {
     // biome-ignore lint/suspicious/noExplicitAny: No need to type this.

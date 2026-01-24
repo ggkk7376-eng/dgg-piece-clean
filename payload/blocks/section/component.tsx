@@ -3,6 +3,7 @@ import { Block } from "@/components/block";
 import { NebulaBackground } from "@/components/nebula-background";
 import { cn } from "@/lib/utils";
 import type { Section as SectionProps } from "@/payload-types";
+import Image from "next/image";
 
 import { TextProvider } from "../text/component";
 
@@ -10,7 +11,10 @@ export function Section({
   slug,
   children,
   className,
-}: SectionProps & Readonly<{ className?: string }>) {
+  backgroundImage,
+  enableOverlay,
+  priority,
+}: SectionProps & Readonly<{ className?: string; priority?: boolean }>) {
   return (
     <NebulaBackground>
       <EnterAnimation>
@@ -21,8 +25,33 @@ export function Section({
             className,
           )}
         >
+
+          {/* Section Background Image */}
+          {backgroundImage && typeof backgroundImage === 'object' && (backgroundImage as any).url && (
+            <div
+              className="absolute inset-0 z-[-1] overflow-hidden"
+              style={{
+                maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)'
+              }}
+            >
+              <Image
+                src={(backgroundImage as any).url}
+                alt={(backgroundImage as any).alt || "Section Background"}
+                fill
+                priority={priority}
+                className="object-cover opacity-60"
+                sizes="100vw"
+                quality={60}
+              />
+              {(enableOverlay ?? true) && (
+                <div className="absolute inset-0 bg-black/60" />
+              )}
+            </div>
+          )}
+
           <div className="relative flex flex-col items-center gap-4">
-            <TextProvider className="text-light-300">
+            <TextProvider className="text-light-100">
               {children?.map((child: any) => (
                 <Block {...child} key={child.id} />
               ))}

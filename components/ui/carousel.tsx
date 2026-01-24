@@ -61,9 +61,9 @@ function Carousel({
     },
     autoScroll
       ? [
-          AutoScroll(typeof autoScroll === "object" ? autoScroll : undefined),
-          ...(plugins ?? []),
-        ]
+        AutoScroll(typeof autoScroll === "object" ? autoScroll : undefined),
+        ...(plugins ?? []),
+      ]
       : [],
   );
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
@@ -200,7 +200,7 @@ function CarouselPrevious({
       {...props}
     >
       <ArrowLeft />
-      <span className="sr-only">Previous slide</span>
+      <span className="sr-only">Poprzedni slajd</span>
     </Button>
   );
 }
@@ -230,7 +230,7 @@ function CarouselNext({
       {...props}
     >
       <ArrowRight />
-      <span className="sr-only">Next slide</span>
+      <span className="sr-only">Następny slajd</span>
     </Button>
   );
 }
